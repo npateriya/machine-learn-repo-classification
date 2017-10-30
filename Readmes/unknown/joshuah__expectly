@@ -1,0 +1,146 @@
+# expectly
+Node script utility for Cisco equipment. (Unstable)
+
+## Settings
+
+```
+var settings = {
+	host: 'switch1',
+	port: 22,
+	protocol: 'ssh',
+	username: 'cisco',
+	password: 'cisco',
+	autoEnable: true,
+	enablePassword: 'cisco'
+}
+```
+To connect to a device with telnet set the **protocol** to `raw` and port number to `23`.
+
+
+## Expectly Methods
+
+* **.connect**() - Connects to the remote host.
+
+* **.end**() - Closes the connection  to the remote host.
+
+## Expectly Events
+
+### Event: 'connect'
+A connection was made to the remote host. The *session* variable is the expectly session for this 
+connection.
+* *session* -  An expecly-stream object for this connection.
+
+### Event: 'ready'
+Emitted after the session is logged in and the enable command is issued if requested.
+* *session* -  An expecly-stream object for this connection.
+
+### Event: 'error'
+
+* *err* - Error events are emitted using this event.
+
+## Example
+
+```
+var Expectly = require('expectly').Expectly;
+var Patterns = require('expectly').Patterns;
+
+var settings = {
+	host: 'switch1',
+	port: 22,
+	protocol: 'ssh',
+	username: 'cisco',
+	password: 'cisco',
+	autoEnable: true,
+	enablePassword: 'cisco'
+}
+
+// These regexs are used to grab the content between the begin and start of a config.
+var BEGIN_CONFIG = Patterns['RANGE_START_RUNNING-CONFIG'];
+var END_CONFIG = Patterns['RANGE_STOP_RUNNING-CONFIG'];
+
+var expectly = new Expectly(settings);
+
+// Show errors...
+expectly.on('error', function(err){
+	console.log('Error', err)
+});
+
+expectly.on('ready', function(session){
+
+	// At this point you should be logged in. The session object is an expectly-stream session.
+
+	// Here we execute a 'show run' command to see 
+
+	session.sync()
+		.send("show run\n")
+		.between(BEGIN_CONFIG, END_CONFIG, function(err, results, done) {
+			// Store the configuration in the sessions config variable.
+			session.set('config', results);
+			done();
+		})
+		.end(function(err){
+			// Get the configuration from the sessions config variable	
+			var deviceConfig = session.get('config');
+			console.log(deviceConfig);
+			expectly.end();
+	})
+})
+
+expectly.connect();
+
+```
+
+## Tricks
+These tricks assume 
+
+
+* To grab running configurations from equipment use the .between() feature and these regular expressions:
+```
+var START_CONFIG = Patterns['RANGE_START_RUNNING-CONFIG'];
+var END_CONFIG = Patterns['RANGE_STOP_RUNNING-CONFIG'];
+
+session.sync()
+	.send("show running-config\n")
+	.between(START_CONFIG, END_CONFIG, function(err, results, done) {
+		// Store the configuration in the sessions config variable.
+		session.set('config', results);
+		done();
+	})
+	.end(function(err){
+		// Get the configuration from the sessions config variable	
+		var deviceConfig = session.get('config');
+		console.log(deviceConfig);
+		expectly.end();
+	})
+
+```
+
+* To monitor what is going during the session:
+
+```
+var expectly = new Expectly(settings);
+expectly.on('connect', function(session) {
+    // Use the connection object to listen for data.
+	expectly.connection.on('data', function(data) {
+		console.log('>>>', data.toString())
+	});
+});
+```
+
+## Patterns
+There is a patterns object included in the module which contains some cisco related regexes. These can be used with the expect, match and between functions of the expectly-stream object.
+
+```
+var Patterns = require('expectly').Patterns;
+var PATTERN_PROMPT = Patterns['PROMPT_CLI'];
+
+```
+
+| Alias | Purpose  | Example  |
+|---|---|---|
+| PROMPT_USERNAME | Match user name prompts. | Username: |
+| PROMPT_PASSWORD | Match password prompts. | Password: |
+| PROMPT_CLI | Match the host> or host# prompts. | switch1> |
+| RANGE_START_RUNNING-CONFIG | Match the begining of a running-config. | Building configuration... |
+| RANGE_STOP_RUNNING-CONFIG | Match the begining of a running-config. | end ... switch |
+

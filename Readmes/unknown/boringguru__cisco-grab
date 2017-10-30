@@ -1,0 +1,4 @@
+# cisco-grab
+Handful of scripts for a small shop that automatically log in to remote Cisco devices and backup the devices configuration.
+
+Built off linux server with tftp-server and 'expect' installed. The script calls in.tftpd explicitly so xinetd isn't needed and is disabled.

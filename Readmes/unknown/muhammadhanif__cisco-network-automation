@@ -1,0 +1,34 @@
+# cisco-network-automation
+
+### Built With
+
+* Python 3.5
+* Python Library: netmiko
+
+### ip name-server
+
+Add your cisco devices to [devices.py](https://github.com/muhammadhanif/cisco-network-automation/blob/master/ip_name-server/devices.py):
+```python
+R1 = {
+'device_type': 'cisco_ios',
+'ip': '10.10.10.2',
+'username': 'hanif',
+'password': 'hanif',
+'secret':'cisco'
+}
+
+R2 = {
+'device_type': 'cisco_ios',
+'ip': '10.10.1.2',
+'username': 'hanif',
+'password': 'hanif',
+'secret':'cisco'
+}
+
+```
+
+Execute [ip_name-server.py](https://github.com/muhammadhanif/cisco-network-automation/blob/master/ip_name-server/ip_name-server.py):
+
+```
+python3.5 ip_name-server.py 192.168.1.6
+```

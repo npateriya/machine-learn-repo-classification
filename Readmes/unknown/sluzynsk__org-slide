@@ -1,0 +1,26 @@
+# org-slide
+
+This is a quick script to create account team slides using Python. It won't
+ work anyplace other than Cisco right now but I'll fix some of that as I
+ move along here. Right now too many values are hard coded.
+
+ It only works inside the Cisco firewall as well and doesn't handle failure
+ conditions in any way.
+
+    usage: app.py [-h] [--template TEMPLATE] [--master MASTER]
+                username users [users ...]
+
+
+    positional arguments:
+      username             username to bind to LDAP with
+      users                space separated CCO ids to add to the team
+
+    optional arguments:
+      -h, --help           show this help message and exit
+      --template TEMPLATE  optional PowerPoint template to use.
+      --master MASTER      master slide # to use in the template. no effect if
+                           --template is not also supplied. defaults to 0.
+
+
+ -Steven Luzynski  
+ sluzynsk@cisco.com

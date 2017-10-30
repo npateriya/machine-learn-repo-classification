@@ -1,0 +1,17 @@
+# GSRouteProcessor
+Clean active translations for cisco router.
+
+### Requirements:
+ - python 3.4.x.
+
+### Platform Support:
+ - CentOS 6.x x64
+ - CentOS 7.0 x64
+ - Windows Server 2008
+ - Windows Server 2008 R2
+ - Windows server 2012
+ - Windows Server 2012 R2
+
+### Usage:
+ - Use `python RouteProcessor.py` for run this.
+ - `-f`, to force active translations.

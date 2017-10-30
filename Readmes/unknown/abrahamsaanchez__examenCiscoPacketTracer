@@ -1,0 +1,14 @@
+# examenCiscoPacketTracer
+Examen de Cisco Packet Tracer realizado el día 03/02/2017
+
+En este examen se nos pedía crear tres redes:
+<ul>
+  <li> Primera red. Esta red está dividida en dos subredes, la primera con un soporte de 30 hosts y la segunda con un soporte de 6 hosts. Esta red está completamente aislada del resto.
+  <li> Segunda red. Esta red está compuesta por tres ordenadores con IP fija y dos ordenadores con DHCP, por lo tanto también contiene un servidor DHCP.
+  <li> Tercera red. Esta red está formada por dos ordenadores con IP fija y dos ordenadores con DHCP, además, esta red contiene dos servidores web, un servidor DNS y un servidor DHCP.
+</ul>
+
+NOTA IMPORTANTE: En la tercera red un switch está dando problemas y deja algunos dispositivos sin conectar, aunque no los conecte esos dispositivos están correctamente configurados.
+
+
+Trabajo realizado por Abraham Sánchez Muñoz.

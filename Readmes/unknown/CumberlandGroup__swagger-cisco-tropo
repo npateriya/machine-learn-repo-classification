@@ -1,0 +1,394 @@
+# Tropo REST API
+
+#### Cisco Tropo API version 1 Swagger Definition File.
+
+File version v1.0.0
+
+*Note: This is a generated README file. For details on the data types in the examples, reference the developer docs [here](https://www.tropo.com/docs/rest).*
+
+## API Methods
+
+### Numbers
+
+Query available numbers in Tropo Exchanges.
+
+#### numbers.getNumbers(queryObject)
+
+Query available Tropo numbers. Returns an array of Number objects. If none are found, returns an empty array.
+
+**Example queryObject:**
+
+```json
+{
+  "available": "true",
+  "prefix": "prefix string"
+}
+```
+
+#### numbers.getNumber(queryObject)
+
+Query a specific Tropo number in e.164 format. Returns a Number object. If number is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "number": "number string"
+}
+```
+
+### Apps
+
+Query, Create, Update, and Delete Tropo Applications.
+
+#### apps.getApps(queryObject)
+
+Query applications for authenticated user. Returns array of Application objects. If none are found, returns empty array.
+
+**Example queryObject:**
+
+```json
+{}
+```
+
+#### apps.createApp(queryObject)
+
+Create an Application for the authenticated user. Requires name, voiceUrl, and/or messagingUrl.  Returns an object with the 'href' property set to the application URL.
+
+**Example queryObject:**
+
+```json
+{
+  "body": {
+    "name": "name string",
+    "voiceUrl": "voiceUrl string",
+    "messagingUrl": "messagingUrl string",
+    "platform": "platform string",
+    "partition": "partition string"
+  }
+}
+```
+
+#### apps.getApp(queryObject)
+
+Query a specific application for the authenticated user by ID. If ID is invalid or not found, returns a 404 error. Returns an object with the 'href' property set to the application URL.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string"
+}
+```
+
+#### apps.updateApp(queryObject)
+
+Update a specific application for the authenticated user by ID. If ID is invalid or not found, returns a 404 error. Returns an object with the 'href' property set to the application URL.
+
+**Example queryObject:**
+
+```json
+{
+  "body": {
+    "name": "name string",
+    "voiceUrl": "voiceUrl string",
+    "messagingUrl": "messagingUrl string",
+    "platform": "platform string",
+    "partition": "partition string"
+  },
+  "appId": "appId string"
+}
+```
+
+#### apps.deleteApp(queryObject)
+
+Delete a Application by ID. Return a 200 on success. If ID is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string"
+}
+```
+
+#### apps.getAppAddresses(queryObject)
+
+Query the addresses associated with an application by ID. Returns an array of Address objects. If ID is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string"
+}
+```
+
+#### apps.createAppAddress(queryObject)
+
+Create a a new address for an Application. The 'type' property can be either 'number' or 'token'. If type is 'number', then either the property 'prefix' or 'number' must be specified. If type is 'token', then the property 'channel' must be spefied. The 'channel' property must be set to either 'voice' or 'messaging'. If the application ID is invalid or not found, returns a 404 error. If a number can not be found or is invalid through the use of 'prefix' or 'number' properties, returns a 503 error.
+
+**Example queryObject:**
+
+```json
+{
+  "body": {
+    "type": "type string",
+    "prefix": "prefix string",
+    "number": "number string",
+    "channel": "channel string"
+  },
+  "appId": "appId string"
+}
+```
+
+#### apps.getAppNumbers(queryObject)
+
+Get Addresses of type 'number' associated with a specific application. Returns an array of Number objects. If the application ID is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string"
+}
+```
+
+#### apps.getAppNumber(queryObject)
+
+Get Addresses of type 'number' associated with a specific application. Returns a Number object. If the application ID or number is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string",
+  "number": "number string"
+}
+```
+
+#### apps.deleteAppNumber(queryObject)
+
+Delete Address of type 'number' associated with a specific application. If the application ID or number is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string",
+  "number": "number string"
+}
+```
+
+#### apps.getAppSips(queryObject)
+
+Get Addresses of type 'sip' associated with a specific application. Returns an array of Sip objects. If the application ID is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string"
+}
+```
+
+#### apps.getAppSip(queryObject)
+
+Get Address of type 'sip' associated with a specific application. Returns a Sip object. If the application ID or SIP URI is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string",
+  "sip": "sip string"
+}
+```
+
+#### apps.getAppTokens(queryObject)
+
+Get Addresses of type 'token' associated with a specific application. Returns an array of Token objects. If the application ID is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string"
+}
+```
+
+#### apps.getAppToken(queryObject)
+
+Get Address of type 'token' associated with a specific application. Returns a Token object. If the application ID or token is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "appId": "appId string",
+  "token": "token string"
+}
+```
+
+### Environments
+
+Query available Tropo environments.
+
+#### environments.getEnvironments(queryObject)
+
+Query available Tropo environments for authenticated user. Returns an array of Environment objects.
+
+**Example queryObject:**
+
+```json
+{}
+```
+
+#### environments.getEnvironment(queryObject)
+
+Query a specific Tropo enviroment for the authenticated user by ID. Returns a Environment object. If ID is invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "environmentId": "environmentId string"
+}
+```
+
+### Exchanges
+
+Query information about Tropo exchanges.
+
+#### exchanges.getExchanges(queryObject)
+
+Get list of global Tropo Exchanges. Returns array of Exchange objects.
+
+**Example queryObject:**
+
+```json
+{}
+```
+
+#### exchanges.getExchange(queryObject)
+
+Get info about a specific Tropo exchange by ID. Returns Exchange object. If invalid or not found, returns a 404 error.
+
+**Example queryObject:**
+
+```json
+{
+  "exchangeId": "exchangeId string"
+}
+```
+
+### Sessions
+
+Manage Tropo sessions.
+
+#### sessions.createSession(queryObject)
+
+Create new Tropo session by providing a voice or messaging token for an application. Returns a Session object. If token is invalid, return a 500 error.
+
+**Example queryObject:**
+
+```json
+{
+  "body": {
+    "token": "token string"
+  }
+}
+```
+
+## API Models
+
+#### Address
+
+- `applicationId` : **[string]** application ID
+- `prefix` : **[string]** Number prefix (country code + area code)
+- `number` : **[string]** Number as e.164
+- `city` : **[string]** Number location city
+- `state` : **[string]** Number location state
+- `country` : **[string]** Number location country
+- `smsEnabled` : **[boolean]** Number has SMS enabled
+- `capability` : **[string]** Number capability (SMS_ONLY, VOICE_ONLY, or VOICE_AND_SMS)
+- `address` : **[string]** SIP URI
+- `token` : **[string]** Token
+- `channel` : **[string]** Token channel (voice or messaging)
+
+
+#### Application
+
+- `id` : **[string]** Application ID
+- `name` : **[string]** Application name
+- `platform` : **[string]** Application platform (webapi or scripting)
+- `voiceUrl` : **[string]** Application voice URL
+- `messagingUrl` : **[string]** Application messaging URL
+- `environment` : **[string]** Application environment (URL or ID)
+- `userId` : **[number]** Application User ID owner
+- `apiType` : **[string]** Application type (webapi or scripting)
+- `partition` : **[string]** Application partition (staging or production)
+
+
+#### Environment
+
+- `id` : **[string]** Environment ID
+- `name` : **[string]** Environment name
+- `platform` : **[string]** Environment platform
+- `routingZone` : **[string]** Environment zone
+- `billingEnabled` : **[boolean]** Environment billing enabled
+
+
+#### Exchange
+
+- `id` : **[number]** Exchange ID
+- `prefix` : **[string]** Exchange prefix (country code + area code)
+- `city` : **[string]** Exchange city
+- `state` : **[string]** Exchange state
+- `country` : **[string]** Exchange country
+- `requiresVerification` : **[boolean]** Exchange verification required
+- `countryDialingCode` : **[string]** Exchange country code
+- `countryId` : **[number]** Exchange country ID
+- `areaCode` : **[string]** Exchange area code
+- `tollFree` : **[boolean]** Exchange is tollfree
+
+
+#### Number
+
+- `applicationId` : **[number]** application ID
+- `prefix` : **[string]** Number prefix (country code + area code)
+- `number` : **[string]** Number e.164
+- `city` : **[string]** Number location city
+- `state` : **[string]** Number location state
+- `country` : **[string]** Number location country
+- `smsEnabled` : **[boolean]** Number has SMS enabled
+- `capability` : **[string]** Number capability (SMS_ONLY, VOICE_ONLY, or VOICE_AND_SMS)
+
+
+#### Session
+
+- `success` : **[boolean]** Session creation successful
+- `token` : **[string]** Session Token
+- `id` : **[string]** Session ID
+- `reason` : **[string]** Session creation error reason
+
+
+#### Sip
+
+- `applicationId` : **[number]** Application ID
+- `address` : **[string]** Sip URI
+
+
+#### Token
+
+- `applicationId` : **[number]** Application ID
+- `token` : **[string]** Token
+- `channel` : **[string]** Token channel (voice or messaging)
+
+
+#### Error
+
+- `error` : **[string]** Tropo error message
+
+
+

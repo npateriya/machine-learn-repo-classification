@@ -1,0 +1,23 @@
+## opnp-bootstrap
+
+This `opnp-bootstrap` Ansible playbook can be used to automatically deploy 
+Cisco's Open Plug-and-Play server together with an accompanying ISC DHCP server and a TFTP-HPA server.
+
+### Installation
+This playbook requires at least Ansible `v1.7.0`. Additionally the `pyyaml` module is required. To install the module, run:
+
+    sudo pip3 install pyyaml
+
+Subsequently the playbook can be ran with:
+
+    ansible-playbook -i production/hosts.yml site.yml --ask-sudo-pass
+    
+**NOTE:** This role is not yet fully idempotent and is thus not provided as such on Ansible Galaxy. This remains future work. 
+
+### Configuration
+The playbook and the accompanying Python script(s) currently depend on a correct configuration of the variable file `/roles/common/vars/main.yml`. Prior to running the playbook this file should be altered to fit the target deployment. Additionally the hosts file `production/hosts.yml` should be altered to reflect the target hosts. 
+
+**NOTE:** Cisco IOS binaries should be supplied from the `roles/common/files/` directory in order to perform IOS upgrades. The contents of this directory are (partially) sourced by the TFTP server on the remote host. The .gitignore file in this directory prevents accidental spreading of copyrighted images via Git. 
+
+### Documentation
+More information about Cisco's Open Plug-and-Play server can be found [here](https://developer.cisco.com/site/open-plug-n-play/learn/learn-open-pnp-protocol/).

@@ -1,0 +1,7 @@
+# Ansible Modules
+Modules for various platforms
+
+## Modules
+ACI - These modules are for Cisco ACI implementation. If you are interested in standalone Python scripts
+for ACI, please look in my Python repository for those scripts as they are posted.
+

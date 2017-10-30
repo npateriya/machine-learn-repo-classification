@@ -1,0 +1,9 @@
+# Cisco UCS M4 & M5 series Intel Processor Comparison Script
+
+Notice: This script is work in progress, and a personal project for learning Python.  However, you're more than welcomed to contribute to it or use for your own project.
+
+The idea of this script, is to provide a quick way to compare the baseline performance of Intel Xeon v4 processors on Cisco UCS M4 series platforms to Intel Xeon Scalable Family processors on Cisco UCS M5 series platforms.
+
+In this first commit it gives the results of the SpecInt 2006, which benchmarks the performance of a CPU when performing one task -it is a measure of CPU processing speed.
+
+As I work on this project, the idea is to also include the SpecInt 2006 Rate results, which benchmarks multi-threaded applications.

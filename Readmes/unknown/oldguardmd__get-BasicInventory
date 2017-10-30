@@ -1,0 +1,18 @@
+# get-BasicInventory
+Collects basic inventory from Cisco UCS includuing models and serial numbers of fabric interconnects, chassis, blades and servers.
+
+This report is intended to give serial numbers and model numbers only in a format that can be imported into a spread sheet. Columns are fixed width and tab delimited. 
+
+Tested with 2.2 and 3.1 of UCS Manager using Python 2.7. 
+
+Useage Examples:
+
+  Connect to 1.1.1.2 using account testAccount with out put to file.
+
+    get-Inventory.py -A testAccount -S 1.1.1.2
+
+  Connect to 1.1.1.2 using account testAccount with output to screen.
+
+    get-Inventory.py -A testAccount -S 1.1.1.2 -R
+
+  

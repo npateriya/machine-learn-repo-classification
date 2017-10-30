@@ -1,0 +1,16 @@
+# AutoAuthMojang
+
+Application that automatically adds the latest auth.mojang.com IP to my Cisco router's ACL.
+
+This is not an out of the box solution, you *will* have to modify this. More specifically you will have to change what commands are run to update the ACL. 
+
+I created this is because I switched VPNs and the new IP is unfortunately blacklisted by Mojang's auth servers. As a work around my router sends all Minecraft related traffic (Anything on port `25565`, and whatever IP `auth.mojang.com` resolves to) out on my home IP and everything else out over the VPN. Annoyingly you can't (afaik) make the ACL resolve a domain.
+
+##### Instead of updating the ACL, why don't you make auth.mojang.com always resolve to the same IP in your hosts file?
+I tried this and discovered something interesting. I assumed that `auth.mojang.com` would just be a round-robin to a whole bunch of IPs, but no. Turns out that it needs to resolve to the same IP on the server side as it does on your computer. 
+
+### Exmaple usage
+
+To connect to the router I'm using SSH. I wrote a wrapper for JSch that allows you to send multiple commands.
+
+`autoauthmojang*.jar -h <hostname> -u <username> -p <password> -i 30`

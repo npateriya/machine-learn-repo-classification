@@ -1,0 +1,14 @@
+nxapi-cli
+=========
+
+Cisco Nexus API simple command line
+
+Right now I'm only comminicating over HTTP not HTTPS. Just download and run from command line.
+
+Tested on Windows8 with ActiveState perl.
+
+NXOS:
+config t
+feature nxapi
+
+nxapi http port 80

@@ -1,0 +1,17 @@
+# Cisco_FWSM_NAT_Search
+
+
+##Synopsis
+Script to search a list of NAT entries (internal->external) and match those to hosts in Cattools backup files.  File NAT.txt will contain entries which include the internal address and an external address with a space between.  When the script processes the file, it will search a directory containing Cattools backup configs for the list entry and, if found, output the hostname it belongs to (if applicable).
+
+##Installation
+None...just run the script with the appropriate files in the current working directory.
+
+##Files Required
+- NAT.txt (list of internal to external entries)
+- Cattools backup configs for the FWSM's (starts with Config.Current.)
+
+##Tasks
+- [x] Condense routine for each backup config file and create definition
+- [x] Create definition to call the process of populating the list with NAT statements
+- [x] Fix formatting issues in hosts.txt file

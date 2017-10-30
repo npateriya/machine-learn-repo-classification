@@ -1,0 +1,119 @@
+# CiscoPhoneDirectory
+
+Python based software to provide the fritzbox phone book on the Cisco IP Phone.
+
+## Enironment
+This software uses Python >= 3.5<br>
+Python dependencies: Flask 0.12.2, fritzconnection (0.6.3)
+Phone: Cisco IP Phone 7941G<br>
+Fritzbox: Fritz!Box 7490<br>
+IDE: Visual Studio 2015<br>
+The software should work with other Cisco 79xx devices and other fritzbox versions, but this has not been tested. 
+
+
+
+
+## Installation
+
+Get the source code:
+```bash
+git https://github.com/huvermann/CiscoPhoneDirectory.git
+```
+Change into the directory
+cd CiscoPhoneDirectory
+
+Install the python dependencies and make the python script executable:
+```bash
+sudo pip3 install -r requirements.txt
+sudo chmod +x runserver.py
+```
+
+## Configuration
+
+Sorry! The description of the configuration file is obsolete. It will be updated in the next days.
+<br>
+Edit the coinfig.json file to configure your local settings.
+```bash
+nano config.json
+```
+Content of the config.json:
+```json
+{
+  
+  "serveraddress": "192.168.178.198", <- hostname where this script is running.
+  "serverport": 5556, <- Port where this script is running
+  "fritzbox": {
+    "enabled": 1,
+    "menuname": "Fritz!BoxContacts",
+    "address": "192.168.178.1", <- IP-address of your fritzbox.
+    "password": "fritzboxpassword" <- Password of your fritzbox.
+  },
+  "googlecsv": {
+    "enabled": 1,  <- To disable this feature, set this to 0.
+    "filename": "google.csv", <- path to your google csv export file.
+    "menuname" :  "Google!Contacts"
+  }
+}
+```
+In this case, this application is running on ip-address 192.168.178.198. The Cisco Ip Phone has to be configured to fetch the phone directory from this address. (See Configure and update the Cisco Ip Phone)
+
+## Usage
+
+Start the server:
+```bash
+python3 runserver.py
+```
+## Test if it's running
+
+After you have started the script, you can open a web browser with the following url:
+http://192.168.178.198/directory.xml
+<br>
+Replace the ip with the ip of the host where you installed the script.
+You should get the following output:
+```xml
+<CiscoIPPhoneMenu>
+<MenuItem>
+<URL>http://192.168.178.198:5556/fritzfonebook.xml</URL>
+<Name>Fritz!BoxContacts</Name>
+</MenuItem>
+<MenuItem>
+<URL>http://192.168.178.198:5556/googlecsv.xml</URL>
+<Name>Google!Contacts</Name>
+</MenuItem>
+<Prompt>Select a directory!</Prompt>
+</CiscoIPPhoneMenu>
+```
+This is what the Cisco Phone needs to get new directory entries. If the user of the phone selects the entry "Fritz!BoxContacts" the phone requests a telephone directory from "http://192.168.178.198:5556/fritzfonebook.xml"
+.<br> You can test this url with your webbrowser. You should get the phone numbers of your fritzbox phone book.<br/>
+
+
+## Configure and update the Cisco IP Phone 7941G
+
+
+To get the CiscoIpPhone running with FritzBox, the phone needs the SIP IP Firmware installed. Normally the phone comes with the SCCP firmware. 
+Download the latest firmware for your phone from here:<br>
+https://software.cisco.com/download/navigator.html?mdfid=269065653&i=rm
+<br>
+Cisco support page:<br>
+http://www.cisco.com/c/en/us/support/collaboration-endpoints/unified-ip-phone-7941g/model.html
+<br>
+To configure your Cisco IP Phone, a TFTP-Server is required! You will need a "IPDefault.cnf" or a "SEP(MAC_Address).cnf.xml" in your TFTP root folder.
+
+In the "IPDefault.cnf" find a line like
+
+directory_url: "http://192.168.178.198:5006/directory.xml"
+
+Or in the file ""SEP(MAC_Address).cnf.xml"" configure the ip address where you installed this service:
+```xml
+<directoryURL>http://192.168.178.198:5556/directory.xml</directoryURL>
+```
+Modifiy the .cnf files before you start the firmware update process!<br>
+
+After the Cisco IP Phone has been updated it should be able to request the phone directory from the FritzBox.
+The new items are shown in the display after pressing the directory key.
+
+
+To be done...
+
+## Extending the Script
+To be done...

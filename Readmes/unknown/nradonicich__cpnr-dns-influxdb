@@ -1,0 +1,209 @@
+# CPNR DNS Telemetry Poller
+
+## Description
+
+In-house developed telemetry poller for Cisco Prime Network Registrar (CPNR) that will write out metrics to InfluxDB.
+
+The data is collected via the REST API interface on the CPNR server and uses the following services
+
+- `web-services/rest/resource/CCMFailoverPair`
+
+  - used to gather the _Provisioning Group_
+
+- `web-services/rest/stats/DNSServer?nrClass=`
+
+  - uses subservices (nrClass) to gather the metrics `DNSServerIPv6Stats`, `DNSServerPerformanceStats`, `DNSServerQueryStats`, `DNSServerSecurityStats`
+
+## Installation
+
+### Required Dependencies
+
+#### Perl Modules
+
+- EV
+- AnyEvent
+- AnyEvent::HTTP
+- AnyEvent::InfluxDB
+- Cpanel::JSON::XS
+- Config::JSON
+- MIME::Base64
+- Getopt::Long
+- Data::Dump
+- File::Basename
+- lib dirname
+
+#### Firewall requirements
+
+- `ICMP` to DNS Hosts
+- `8080/TCP` or `8443/TCP` to DNS Host REST API
+- `8086/TCP` to InfluxDB Host or InfluxDB Load Balancer
+
+### Clone Repository
+
+- install repository to /opt/influx_scripts (or modify service unit file to match)
+
+  ```sh
+  cd /opt/influx_scripts
+  git clone https://git.repo/cpnr-dns-poller/cpnr-dns-poller
+  ```
+
+### Systemd Service Unit
+
+- Copy `cpnr-dns-poller.service` file from project folder to `/etc/systemd/system/`
+- Run
+
+  - `systemctl daemon-reload`
+  - `systemctl enable cpnr-dns-poller.service`
+  - `systemctl start cpnr-dns-poller.service`
+
+## Configuration
+
+### `config.json` file
+
+- The config file is written in JSON format for ingest into the script via _Config::JSON_
+- Sample config file can be seen below.
+
+  - Hosts are contained inside _hosts_ array with properties _host_ for hostname and _tags_ for the appropriate tags for the entry
+  - InfluxDB _host_, _port_ and _database_ is contained in the _influx_ object
+  - CPNR REST API authentication is contained in the _username_ and _password_ propertyNames
+
+    ```json
+    {
+      "hosts": [
+                 {
+                   "host" : "hostname.domain.name",
+                   "tags" : { "datacenter": "dc-a", "region" : "ON", "env" : "lab", "service" : "dns_auth" }
+                 },
+                 {
+                   "host" : "hostname2.domain.name",
+                   "tags" : { "datacenter": "dc-b", "region" : "QC", "env" : "prod", "service" : "dns_auth" }
+                 }
+      ],
+      "influx": {
+        "port" : 8086,
+        "host" : "influxdb.domain.name",
+        "database" : "db"
+      },
+      "username": "dns.api.user",
+      "password": "dns.api.pass"
+    }
+    ```
+
+## Running
+
+### Testing a configuration
+
+- Run script with the `--test-config` option from the CLI. This will cause the script to read the new config, run once, and pretty print a JSON Object of the data that would be written to InfluxDB to be checked that data is correct for the changes made. This is mainly for testing the changes to the hosts, to test other changes it may be better to test this first then check the data populated to the database manually on scheduled runs.
+
+### Scheduling/Daemonizing
+
+- See [Systemd Service Unit](#Systemd Service Unit)
+- Verify is Running
+
+  - `ps aux | grep cpnr-dns-poller`
+  - Login to Grafana, InfluxDB, or Chronograf and select measurement/values to ensure writing to db
+
+### Restarting after configuration change
+
+- `systemctl reload cpnr-dns-poller.service`
+
+  - This is a hard reload and you may lose some data if it is in the polling process (safest to run between 30-59seconds in the minute on the hosting system)
+
+## InfluxDB Database Structure
+
+RP - Retention Policy | M - measurement | T - tags | F - fields
+
+```text
+DB provisioning
+  RP autogen -> 0s
+    SGDuration -> 168h0m0s
+    Default -> false
+  RP 5y2w_ap -> 44184h0m0s
+    SGDuration -> 168h0m0s
+    Default -> true
+  M DNSServerIPv6Stats -> 3
+    T application -> 1
+    T datacenter -> 1
+    T env -> 1
+    T host -> 3
+    T region -> 1
+    T service -> 1
+    F ipv6PacketsIn -> float
+    F ipv6PacketsOut -> float
+  M DNSServerPerformanceStats -> 3
+    T application -> 1
+    T datacenter -> 1
+    T env -> 1
+    T host -> 3
+    T region -> 1
+    T service -> 1
+    F axfrsIn -> float
+    F axfrsOut -> float
+    F ipv4PacketsIn -> float
+    F ipv4PacketsOut -> float
+    F ixfrsFullResp -> float
+    F ixfrsIn -> float
+    F ixfrsOut -> float
+    F notifiesIn -> float
+    F notifiesOut -> float
+    F updatePackets -> float
+    F updatedRrs -> float
+    F xfrsInAtLimit -> float
+    F xfrsOutAtLimit -> float
+  M DNSServerQueryStats -> 3
+    T application -> 1
+    T datacenter -> 1
+    T env -> 1
+    T host -> 3
+    T region -> 1
+    T service -> 1
+    F memCacheHits -> float
+    F memCacheMisses -> float
+    F queriesDropped -> float
+    F queriesOverIpv4 -> float
+    F queriesOverIpv6 -> float
+    F queriesOverTcp -> float
+    F queriesOverUdp -> float
+    F queriesRpz -> float
+    F queriesTotal -> float
+    F queriesTypeA -> float
+    F queriesTypeAaaa -> float
+    F queriesTypeAny -> float
+    F queriesTypeCname -> float
+    F queriesTypeMx -> float
+    F queriesTypeNaptr -> float
+    F queriesTypeNs -> float
+    F queriesTypeOther -> float
+    F queriesTypePtr -> float
+    F queriesTypeSoa -> float
+    F queriesWithEdns -> float
+    F queryAnswersRpzHits -> float
+    F queryAnswersRpzMisses -> float
+    F queryAnswersWithFormerr -> float
+    F queryAnswersWithNodata -> float
+    F queryAnswersWithNoerror -> float
+    F queryAnswersWithNotauth -> float
+    F queryAnswersWithNxdomain -> float
+    F queryAnswersWithOtherErrors -> float
+    F queryAnswersWithReferral -> float
+    F queryAnswersWithRefused -> float
+    F queryAnswersWithServfail -> float
+  M DNSServerSecurityStats -> 3
+    T application -> 1
+    T datacenter -> 1
+    T env -> 1
+    T host -> 3
+    T region -> 1
+    T service -> 1
+    F blackholeAclDroppedRequests -> float
+    F detectedTsigBadKey -> float
+    F detectedTsigBadSig -> float
+    F detectedTsigBadTime -> float
+    F rcvdTsigBadKey -> float
+    F rcvdTsigBadSig -> float
+    F rcvdTsigBadTime -> float
+    F rcvdTsigPackets -> float
+    F restrictQueryAcl -> float
+    F unauthUpdateReqs -> float
+    F unauthXferReqs -> float
+```

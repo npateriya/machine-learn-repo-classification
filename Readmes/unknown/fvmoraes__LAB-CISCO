@@ -1,0 +1,18 @@
+# Laboratório de Redes Cisco..
+
+# 1.Projeto:
+  O projeto consiste em criar a configuração de três segmentos vlan, e intercomunicar as
+diferentes redes virtuais e seu trafego através de um roteador ligado a um de três switchs existentes,
+as configurações de vlan devem ser passadas pelo protocolo VTP do switch1 aos switch2 e switch3.
+E o trafego roteado para qualquer host em qualquer switch em qualquer vlan.
+
+# 2.Imagem:
+  Veja o arquivo: "imagem_projeto.png".
+  
+# 2.Comandos:
+
+  Veja os arquivos: switch_1, switch_2, switch_3 e router_main.
+  
+# 3.Script:
+
+  Veja o arquivo: script_configuracao.

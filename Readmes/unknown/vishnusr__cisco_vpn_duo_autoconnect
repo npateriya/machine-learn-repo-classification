@@ -1,0 +1,33 @@
+# Automatically Connect to Cisco VPN + DUO
+
+This collection of scripts helps automate connecting to VPN networks via CISCO's VPN Anyconnect utility protected by DUO two-factor authentication.
+
+## On OSX
+The Applescript (tested on OSX El Capitan 10.11.6) retreives the password from the OSX Keychain (specifically, from an entry named 'cisco_vpn') and instructs Duo to send a push notification to your smartphone.
+
+### Installation
+1. Create a new generic password entry in Keychain Access called "cisco_vpn" (the name in Keychain access must match that in line 39 below) with your password for the Cisco AnyConnect VPN server. So this entry should have Name: cisco_vpn, and Account: cisco_vpn
+2. Open this script in Script Editor (both this and the above are in the Applications->Utilities folder) and "Save as.." an Application (.app) with name: "Automatic_Anyconnect".
+3. Open Security & Privacy System Preferences, go to Privacy, Accessibility.
+4. Enable the above .app so it can access Accessibility
+5. Copy and paste a nice icon on the generic Applescript icon (I used a copy of the default AnyConnect one)
+6. Add the new .app to /Users/[yourshortname]/Applications with a shortcut to your Dock 
+7. Enjoy the fast connection with no need to enter password and increased security of not having a sensitive password stored as plain text
+8. Run script again to close connection
+
+Note: You can run this app either using Spotlight (Cmd + Spacebar, followed by typing the apps name) or by typing `open -a Automatic_Anyconnect` into a terminal window.
+
+This is based on halocardina's script at https://gist.github.com/halocaridina/99466e4b1d08e57fb9dd
+
+
+## On Windows 10
+
+The Visual Basic Script (tested on Windows 10 Anniversary Update) unfortunately stores the password in plain text within the script (a terrible thing to do really - use at your own risk) and instructs DUO to call you on your secondary phone number ('phone2'). 
+
+This is based on RADA's answer on stackoverflow: http://superuser.com/a/885506
+
+### Installation
+1. Download the file
+2. Change the password
+3. Save somewhere accessible
+4. Double-click to run

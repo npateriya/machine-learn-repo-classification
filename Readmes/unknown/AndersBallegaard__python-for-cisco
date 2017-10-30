@@ -1,0 +1,7 @@
+# python for cisco
+A python libary network automation
+
+so far the documentation is in the code but it should be pretty easy to use
+
+The idea about this is to make network automation simple by having the ability to have a host file with difrent host groups and just pushing commands out to a group or a single device at a time.
+in the future a goal is to intigrate SNMP support, topology maps, and host auto discovery but sugestions are welcome

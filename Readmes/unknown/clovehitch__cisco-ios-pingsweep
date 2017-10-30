@@ -1,0 +1,11 @@
+# cisco-ios-pingsweep
+Sends a series of ping commands to be executed on a remote cisco device
+
+Using the Netmiko library this script will connect to a host and send a series of ping commands to ping the subnet of your choice. It will then save the file as "ping.txt"
+
+
+Why not just ping from a host?
+ - The host machine might not have access to the subnet that needs to be scanned
+ 
+ In the ping command why use "timeout 1" and "repeat 3"
+ - In most LAN enviroments a device will respond much faster than 1000ms. Waiting another 4 seconds wastes time. The first ping might fail if the address is not in the ARP cache already, the two follow up should be enough to catch this.

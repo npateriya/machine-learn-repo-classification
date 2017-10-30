@@ -1,0 +1,40 @@
+# CISCO SHOW GETTER
+The script may be useful for network admins who need to automate getting of the same command from multiple cisco devices.
+
+### HOW TO
+1. make sure you have installed all dependencies listed in the requirements.txt
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+2. Adjust the config.yml file
+ - specify your username
+ - specify your password
+ - specify the command you would like to execute
+ - specify the cisco device hostnames from which you would like to obtain the output
+The script will resolve the hostnames to the IP addresses using the network setting on your computer system.
+
+3. run the script
+
+    ```
+    python3 cisco_show_getter
+    ```
+
+4. If successfully executed, in the same folder will appear new files. For each devices, separated file, each with the output from the executed command.
+
+Enjoy!
+
+Note: This script is more or less a python programming learning project for me. I'm focusing on the following:
+- correct descriptions of the each function
+- using of the context managers
+- using of the named tuples
+- PEP8 compliance
+- informative README.md file
+- the LICENSE file included
+
+### TODO
+- try to use sets somewhere
+
+### CHANGELOG
+- 20.10.2016 - Formatting of the code according to PEP8

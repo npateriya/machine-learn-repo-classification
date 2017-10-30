@@ -1,0 +1,3 @@
+# cisco-firewall-sessions-geoip
+
+The script connects to a Cisco router running IOS firewall/IP inspection. It pulls the current sessions, extracts the remote IPs, maps them to counties using a Geo IP database, and crafts a Google Maps API URL. This URL then returns an image showing all the counties to which you have open sessions.

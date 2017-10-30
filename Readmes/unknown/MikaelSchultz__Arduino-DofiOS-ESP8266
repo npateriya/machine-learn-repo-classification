@@ -1,0 +1,174 @@
+# DofiOS-ESP8266
+An extensible Cisco like Shell for Arduino (ESP8266).
+
+## Introduction
+This is a library for Arduino (specifically the ESP8266 chip) that has a built-in telnet server you can connect to in order to execute pre defined and user defined commands.
+
+You can add your own groups and commands to the menu system. See the example files.
+
+In the image below a user defined group **maingroup** has been added.
+![DofiOS-QuestionMark](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/DofiOS-QuestionMark.png)
+
+## Features
+The system has three main features.
+
+### Question Mark (**?**)
+You can always press the **?** key to get help in the current context (*see **red arrow** in image above*). This is very powerful, give it a try!
+
+### Tab compleation
+There is full support for tab completion.
+
+If you press the TAB key, the command you are currently writing will be completed for you as much as possible.
+
+### Partial command execution
+The commands typed doesn't have to be complete.
+
+Say you want to run `show version`.
+
+You can as easily just type `sh ve` or `s v` provided there is only one match for these commands.
+
+## Command Parameters
+**Static** parameters passed to a command is printed "as is" in the help text.<br>
+**Example**: true, false or none
+
+**Variable** parameters passed to a command is printed as their name with 
+curly brackets around them.<br>
+**Example**: {ssid}, {passphrase} or {hostname}
+
+Parameters that can have multiple values are separated with a pipe character: |
+
+### Example
+Command: `configure ap passphrase none|{passphrase} <cr>`
+
+The command `configure ap passphrase` has one parameter that can be **none** or **{passphrase}**:
+```
+configure ap passphrase none
+configure ap passphrase MySecretPass!
+```
+
+## Command Reference
+
+These are the built-in commands that are available out of the box.
+Every command is appended with \<cr\> indicating that it has no more parameters and
+that Carriage Return should be pressed to execute the command.
+
+#### Enable or disable the on-board access point
+```
+configure ap enabled true|false <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command01.png)
+
+#### Set the passphrase for the access point
+This can only be set once the access point has been enabled.
+```
+configure ap passphrase none|{passphrase} <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command02.png)
+
+#### Set the SSID for the access point
+This can only be set once the access point has been enabled.
+```
+configure ap ssid {ssid} <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command03.png)
+
+#### Set the hostname of the device
+```
+configure hostname {hostname} <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command04.png)
+
+#### Enable or disable auto-connect
+If the value is set
+to true the WiFi station will automatically try
+to connect to the access point in the saved configuration.
+```
+configure station auto-connect true|false <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command05.png)
+
+#### Connect to the access point with an SSID and a passphrase
+```
+configure station connect {ssid} {passphrase} <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command06.png)
+
+#### Disconnect from the access point
+```
+configure station disconnect <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command07.png)
+
+#### Logout of the device and terminate the Telnet session
+```
+exit <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command08.png)
+
+#### Restart the device
+```
+restart <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command09.png)
+
+#### Show the access point IP information
+```
+show ap ip <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command10.png)
+
+#### Show access point status
+Show if the access point is currently enabled or
+disabled and how many clients that are connected.
+```
+show ap status <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command11.png)
+
+#### Show detailed information about the access point
+```
+show ap summary <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command12.png)
+
+#### Show the station IP information
+```
+show station ip <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command13.png)
+
+#### Show station status
+Show if the station is currently enablde or disabled
+and status about the WiFi connection.
+```
+show station status <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command14.png)
+
+#### Show detailed information about the station
+```
+show station summary <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command15.png)
+
+#### Show detailed information about the device
+```
+show version <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command16.png)
+
+#### Run a scan for nearby WiFi networks
+```
+show wlans <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command17.png)
+
+#### Write the current configuration to flash
+All commands above that change the configuration 
+will **not be persistent** unless written to flash.
+```
+write <cr>
+```
+![DofiOS-Command01](https://github.com/MikaelSchultz/Arduino-DofiOS-ESP8266/blob/master/screenshots/Command18.png)
+
+

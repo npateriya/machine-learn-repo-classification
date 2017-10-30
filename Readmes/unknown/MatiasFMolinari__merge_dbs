@@ -1,0 +1,30 @@
+# Merge Databases
+
+Merge a MSSQL database on a Cisco VPN into an Oracle database on a Juniper VPN
+
+## Install Dependencies
+
+In order to merge databases, you should have the following installed in your PC.
+
+#### 1. Windows 10 + Bash
+How to install bash: https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
+
+#### 2. Install ruby (Recommended version: 2.3.1)
+How to install ruby on Windows: http://rubyinstaller.org/
+
+#### 3. Install FreeTDS
+How to install FreeTDS on Windows: https://sourceforge.net/projects/freetdswindows/
+
+#### 4. Install TinyTDS
+To install, run the follwing command on terminal
+```
+gem install tiny_tds
+```
+
+## Add Local Info
+You need to add your information anywhere in the code where it says ``` # ADD INFO! ```
+Go through each file or do a dir search to find the comment.
+
+## Usage
+
+Run ``` rake ``` in the bash terminal. You must be in merge_databases (root) dir.

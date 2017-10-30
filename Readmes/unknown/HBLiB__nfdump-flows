@@ -1,0 +1,7 @@
+# What it does
+Fetches interface name, description and snmp index number
+and outputs the corresponding snmp ifindex with the given description.
+With the time calculated by the given time in minutes.
+
+####### Example for router "router1", interface description "cogent", last hour (60 minutes)
+nflows.rb router1 cogent 60

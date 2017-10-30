@@ -1,0 +1,26 @@
+<html>
+<head>
+<h1>#Cisco device backups with threading</h1><br>
+</head>
+	<body>
+<h1>## Installing</h1><br>
+pip install -r requirements.txt<br>
+<br>
+<h1>### Running</h1> <br>
+<h2>To avoid enable subcommand use 15 level privileged users.</h2><br>
+<br>
+usage: backup.py [-h] [-d DIR] [-u USERNAME] [-p PASSWORD] [-f FILE]<br>
+<br>
+Script for automatic Cisco device backups with threading<br>
+<br>
+optional arguments:<br>
+  -h, --help            show this help message and exit<br>
+  -d DIR, --dir DIR     Directory to put backups<br>
+  -u USERNAME, --username USERNAME<br>
+                        Define username for connection<br>
+  -p PASSWORD, --password PASSWORD<br>
+                        Define password for connection<br>
+  -f FILE, --file FILE  File with device names, if no filename provided it's<br>
+                        gonna use list.txt as default file<br>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+##When you got asked for collecting over 200+ Cisco IP phone SN number or other details, use these scripts 
+
+CUCM is very easy to use but lack of showing individual phone details. The only way to get every phones data is go through every IP phones' web interface and that is quite painful. these two scripts can help you collect all details within mins.
+
+>./cisco_sn_crawler.sh first generate IP address from what you've type and create X.X.X.2 ~ X.X.X.253 in ./ip_list, then on each IP it crawl back the content of the first page of the webpage and grep this phone's DN, model and SN. (I add a "res = requests.get(IP, timeout=1)" in web_crawler.py to make it aboard IP address which doesn't have a webpage behind it, you can make it timeout longer if your phones are on remote sites)
+
+**Requirement:
+Python 2.7 and Linux shell**
+ 
+$./cisco_sn_crawler.sh 
+
+Please enter first 3 octet of your phone IP range: (e.g 192.168.1)
+192.168.2
+
+>(Will save all the mask 24 result back to ./sn_result file)
+
+You can modify cisco_sn_crawler.sh in order to grep mac-address, serial number, firmware version or port details.
+
+$python web_crawler.py http://X.X.X.X
+
+>(Will list out all info from the fist page of http://X.X.X.X)

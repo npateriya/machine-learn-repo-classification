@@ -1,0 +1,8 @@
+# object-status-changer
+Folder structure:
+./
+./cfg
+  holiday - json file format
+  config - ini file format
+./db - consists of json file formats
+./modules

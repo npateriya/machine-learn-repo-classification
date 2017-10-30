@@ -1,0 +1,5 @@
+# schemas-cisco-tropo
+
+- `tropo-webapi.json` - Validates JSON for responses to Tropo Web-API JSON inbound application triggers [(more)](https://www.tropo.com/docs/webapi/reference)
+- `tropo-session.json` - Validates JSON received from Tropo when a session is started [(more)](https://www.tropo.com/docs/webapi/session)
+- `tropo-result.json` - Validates JSON received from Tropo when user responds to an "ask" [(more)](https://www.tropo.com/docs/webapi/result)

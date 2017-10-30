@@ -1,0 +1,42 @@
+**Config gatherer**
+The simpliest script to send commands to Cisco devices and save output to separate files.
+Based on authentication data located in Excel file.
+
+Script is useful as a fast method to send commands and gather outputs to a bunch of devices with different sets of authentication parameters.
+
+**Basic collection contains two files**:
+- python script;
+- excel workbook with targets and authentication data.
+
+**Excel file contains following columns**:
+- hostname (informational only);
+- IP address;
+- username (with priviledge level 15);
+- password;
+- type of connection (telnet or ssh).
+
+**Usage**:
+
+`[Linux]`
+- git clone https://github.com/Sk1f3r/config-gatherer.git
+- sudo python setup.py install
+
+`[Windows]`
+- download the script and the workbook as is
+
+`[Shared steps]`
+- ensure that the script and the workbook are in a same directory;
+- update the workbook to a correct state;
+- update section VAR in the python script;
+- change excel filename as needed: variable 'data_source' (default 'auth.xls');
+- change a list of commands as needed: variable 'commands' (default 'show cdp neighbors' and 'show ip interface brief');
+- excute the script (-v key is available for debugging)
+
+**List of required non-builtin modules**:
+- xlrd
+- netmiko
+
+**TODO**:
+- PEP8 style correction;
+- test with Juniper devices;
+- decide if "enable secret" option is worth to be added.

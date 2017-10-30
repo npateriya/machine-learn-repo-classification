@@ -1,0 +1,4 @@
+# cisco-alf
+Fabricated data for the Active Learning Forum at Cisco.  Data is built using the `make_data` function defined in the `make_data.r` file.  All visuals are built using the `build_charts` function, defined in the `visualize-data.R` file.  
+
+All components built by [Michael Freeman](http://mfviz.com/#/).

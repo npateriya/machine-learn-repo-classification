@@ -1,0 +1,38 @@
+Subnetter [![Build Status](https://travis-ci.org/dckg/Subnetter.svg?branch=master)](https://travis-ci.org/dckg/Subnetter)
+====
+Graphical program for solving  Robb Jones' "IPv4 Addressing and Subnetting Workbook", which is part of Cisco Networking Academy, CCNA1 course.
+
+![Screenshot](https://raw.githubusercontent.com/dckg/Subnetter/master/docs/img/Screenshot_20170316_135827.png)
+
+# Requirements
+## Running
+* Proprietary Oracle JRE or OpenJFX. 
+* Java 8 or higher
+## Building
+* JDK
+---
+## How to build 
+Windows:
+````
+gradlew.bat build
+````
+
+Linux/UNIX
+````
+./gradlew build
+````
+
+----
+This will generate a ``.zip`` under ``build/distributions`` directory, containing the application ``.jar`` and start scripts for each OS. 
+## How to run
+After building, zipfile contains under folder ``bin``
+````
+Subnetter-1.0
+├── bin
+│   ├── Subnetter
+│   └── Subnetter.bat
+└── lib
+    └── Subnetter-1.0.jar
+````
+* a ``Subnetter.bat`` to start the application for Windows
+* a shell script ``Subnetter`` for UNIX-like systems (Linux, Mac OS, ...)

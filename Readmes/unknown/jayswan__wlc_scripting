@@ -1,0 +1,11 @@
+This script does the following:
+
+1. Reads 802.11ac radio metrics from Cisco WLC using netmiko.
+2. Parse the output into a pandas DataFrame.
+3. Pickles the output in the local directory as "test.pkl".
+
+This allows you to use IPython, load the pickle, and play around with the data interactively.
+
+###Known Issues###
+1. Frequently, netmiko throws a socket error when connecting to the WLC. Still troubleshooting this.
+2. Possible issues with paging (see [netmiko issue](https://github.com/ktbyers/netmiko/issues/66).)

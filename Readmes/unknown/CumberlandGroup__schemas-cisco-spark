@@ -1,0 +1,13 @@
+# schemas-cisco-spark
+
+- `spark-event.json` - Validates JSON for Inbound Webhook Event
+- `spark-licenses.json` - Validates JSON for License(s) object/collection
+- `spark-memberships.json` - Validates JSON for Membership(s) object/collection
+- `spark-messages.json` - Validates JSON for Message(s) object/collection
+- `spark-organizations.json` - Validates JSON for Organization(s) object/collection
+- `spark-people.json` - Validates JSON for People/Person object/collection
+- `spark-roles.json` - Validates JSON for Role(s) object/collection
+- `spark-rooms.json` - Validates JSON for Room(s) object/collection
+- `spark-team-memberships.json` - Validates JSON for TeamMembership(s) object/collection
+- `spark-teams.json` - Validates JSON for Team(s) object/collection
+- `spark-webhooks.json` - Validates JSON for Webhook(s) object/collection

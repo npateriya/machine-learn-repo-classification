@@ -1,0 +1,16 @@
+# Networking
+Web application where you can make tests without calculating anything. The tests are saved to a database and can be called down with the given id. There are examples for vlsm (Variable Length Subnet Mask).
+
+Progress @ https://trello.com/b/wUgo3RG0
+
+Command Line:
+- npm install body-parser --save
+- npm install clipboard --save
+- npm install ejs --save
+- npm install express --save
+- npm install moment --save
+- npm install mongo-client --save
+- npm install mongodb --save
+- npm install shortid --save
+
+You need mongo database for it to work or change the way you store the information.

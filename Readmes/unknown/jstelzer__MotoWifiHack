@@ -1,0 +1,22 @@
+# Moto Wifi Hack
+
+This is a work around for Moto X (2014) phones running lolipop.
+
+Under certain conditions, Cisco wireless access points using PEAP will
+not work with the moto x.
+
+The symptom is that the wifi AP goes from "connecting" to "saved" but
+never connects. This is due to an interoperability issue with the
+cisco firmare and the PFM implementation on the phone.
+
+Rather than provide a work around, Motorola insists that the world
+should patch their networks. This is despite other models of phones
+running lolipop being able to use these access points without issue.
+
+This tool simply flips a 1 to a 0 in a text file and disables the feature.
+
+More reading:
+
+http://forum.xda-developers.com/moto-x-2014/help/moto-x-2014-cisco-ap-t2978215
+
+

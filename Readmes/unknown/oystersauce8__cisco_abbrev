@@ -1,0 +1,70 @@
+
+[![Gem Version](https://badge.fury.io/rb/cisco_abbrev.svg)](https://badge.fury.io/rb/cisco_abbrev)
+[![Build Status](https://travis-ci.org/oystersauce8/cisco_abbrev.svg?branch=master)](https://travis-ci.org/oystersauce8/check_tfn)
+[![Dependency Status](https://gemnasium.com/badges/github.com/oystersauce8/cisco_abbrev.svg)](https://gemnasium.com/github.com/oystersauce8/cisco_abbrev)
+[![Code Climate](https://codeclimate.com/github/oystersauce8/cisco_abbrev/badges/gpa.svg)](https://codeclimate.com/github/oystersauce8/cisco_abbrev)
+[![Coverage Status](https://coveralls.io/repos/github/oystersauce8/cisco_abbrev/badge.svg?branch=master)](https://coveralls.io/github/oystersauce8/cisco_abbrev?branch=master)
+
+
+# CiscoAbbrev
+
+A ruby gem to translate to/from Cisco Interface Abbreviations
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'cisco_abbrev'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install cisco_abbrev
+
+## Usage
+
+```ruby
+
+CiscoAbbrev.encode("GigabitEthernet0/1")  #=> "Gi0/1"
+
+CiscoAbbrev.decode("Gi0/1")               #=> "GigabitEthernet0/1"
+
+```
+
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake false` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/oystersauce8/cisco_abbrev.
+
+## License
+
+(The MIT License)
+
+Copyright (c) 2009-2016 Sam Weerasinghe
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

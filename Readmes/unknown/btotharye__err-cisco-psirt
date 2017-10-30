@@ -1,0 +1,18 @@
+## Cisco PSIRT plugin for [Errbot](https://errbot.io)
+
+## Configuration
+In order to use bot you need to install it from errbot with `!repos install https://github.com/btotharye/err-cisco-psirt.git`
+
+After installing you can then do `!plugin config psirt` to get the output and see the order you need to specify your credentials in:
+
+```
+!plugin config psirt {'CLIENT_ID': 'client id here', 'CLIENT_SECRET': 'client secret here'}
+```
+
+You can get a client ID and secret from signing up for the API at https://apiconsole.cisco.com/apps/myapis under the PSIRT application.
+
+### About
+[Errbot](http://errbot.io) is a python chatbot, this plugin answers questions about Cisco Open Vulnerabilities (PSIRT)
+
+### Installation
+From errbot issue command: `!repos install https://github.com/btotharye/err-cisco-psirt.git`

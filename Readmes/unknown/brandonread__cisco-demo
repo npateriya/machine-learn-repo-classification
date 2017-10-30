@@ -1,0 +1,36 @@
+#Getting Started#
+This is a simple user management demo application built using Play, Angular, and MongoDB, with Scala as the server language, and CoffeeScript for the client component. You may view the application running at https://gentle-journey-1866.herokuapp.com/.  You may additionally build and serve the application locally by following the instructions below.
+
+##Setting up MongoDB##
+We will use MongoDB for persisting data for our web application.  In order to save and read data to our database, we must make sure that a MongoDB instance is running on our machine before starting our server.
+
+First, install MongoDB:
+
+`brew install mongo`
+
+Next, run:
+
+`mongod --config /usr/local/etc/mongod.conf`
+
+Which tells Mongo to start a server based on the parameters specified in the configuration file we are pointing to.  The Mongo instance runs on `localhost:27017` by default, which is what our application will be looking for.  
+
+***NOTE:*** This instruction assumes you have Homebrew installed. If you already have MongoDB installed or are using an alternate installation method, just be sure that an instance is running at `localhost:27017`.
+
+##Running the Application##
+To start the server and view the application, navigate to the application directory and then start the build process by entering:
+
+`./activator run`
+
+This will load the project definition from the directory, download any dependencies, compile CoffeeScript files, start the server, and connect to the database.  Please give this process a few minutes to run, as there is some setup overhead for the first time running the command.  
+
+Once the application is up and running, requests are served from `localhost:9000`. Enter this address into a browser and you will see the application index page that has been served locally.
+
+##Running Tests##
+If you would like to run the tests to see how the application performs, enter:
+
+`./activator test`
+
+This will locate all of the tests in the `/test` directory and run the available Unit and Integration tests, displaying the results to standard output.
+
+-----
+*Brandon Read -- Spring 2015 -- Cisco Demo Application*

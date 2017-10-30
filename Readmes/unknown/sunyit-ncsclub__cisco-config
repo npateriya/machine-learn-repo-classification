@@ -1,0 +1,1 @@
+These are security configs for Cisco devices made by the NCS Club

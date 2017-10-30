@@ -1,0 +1,37 @@
+# asa-access
+Bash script to easily launch ASDM or serial console session with a Cisco ASA. 
+
+## Requirements
+This script requires the following to be installed:
+- Java Runtime Environment (Required version of JRE depends on the version of ASDM installed on your ASA)
+- IcedTea (icedtea-netx package in Debian, icedtea-web package in RHEL)
+- screen
+
+The following commands must be in your path:
+- javaws
+- screen
+
+Unless you plan on using just the console, you must also be in a working X environment. 
+
+When using the console, you will likely need root or sudo access.
+
+## Usage
+
+Synopsis:
+
+`asa-access <IP ADDRESS>[:PORT NUMBER]`
+
+`asa-access <HOST NAME>[:PORT NUMBER]`
+
+`asa-access console`
+
+Simply pass the IP address or host name as an argument to the script. The port number defaults to 443 if not specified. 
+
+This script can also connect to the ASA's serial console. Simply pass the word "console" instead of an IP address. 
+
+## Limitations
+This is something I just hacked together, so there are a few things to be aware of. 
+- The script assumes your console is at /dev/ttyUSB0. I might fix this later if it becomes a problem for me. If it becomes a problem for you, fix it yourself.
+- Some distributions require root or sudo access to use /dev/ttyUSB0. If you can't get the console functionality to work, try putting sudo in front. 
+- For obvious reasons, you cannot connect to an ASA with a hostname of "console". 
+- I don't know why, but this script recently stopped working for me with Cisco ASA 5505's. Larger models still work. 

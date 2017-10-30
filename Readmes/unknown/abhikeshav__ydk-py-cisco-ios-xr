@@ -1,0 +1,23 @@
+<a href="https://github.com/CiscoDevNet/ydk-gen"><img src="https://cloud.githubusercontent.com/assets/17089095/14834057/2e1fe270-0bb7-11e6-9e94-73dd7d71e87d.png" height="240" width="240" ></a>
+
+# YDK Cisco IOS XR 6.0.1 L2Vpn bundle
+
+YDK bundle is a package of python API's that are modeled in YANG.
+
+# Installation
+
+## Prerequisites
+
+Check the [system requirements](https://github.com/CiscoDevNet/ydk-py#system-requirements). Install the core and ietf packages from the ydk-py repository following the [installation instructions](https://github.com/CiscoDevNet/ydk-py#install-tips).
+
+## Installing the bundle
+Create a source distribution for the cisco-ios-xr bundle (only contains l2vpn model):
+```
+    $ python setup.py sdist
+```
+
+Install the bundle:
+```
+    $ pip install dist/ydk-*.tar.gz
+```
+

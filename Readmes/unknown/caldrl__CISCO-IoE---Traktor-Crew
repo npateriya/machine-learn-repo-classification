@@ -1,0 +1,22 @@
+# 🚜 🚜 🚜
+## CISCO IoE - Traktor Crew
+##### Tasks
+Every single task is done in corresponding folder. So if you want to se task n.1... yeah you can find it in folder named "task_1"!
+##### Bonus projects
+From time to time, we should create some bonus projects, so you can find it there too!
+
+## Use our fresh codes
+Our projects are using all new cool programing tools, so if you want to use them on your own, you have to do few things!
+###### Bower
+```sh
+    bower i
+```
+###### NodeJS - npm
+```sh
+    npm i
+```
+
+## DONE!
+And when we are done with our NAG tasks and all "the super bonus projects"... We are doing something like this:
+
+!['stache](http://i.giphy.com/PzP4S0nWVDDaw.gif)

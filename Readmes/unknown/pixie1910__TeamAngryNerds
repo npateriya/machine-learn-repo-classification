@@ -1,0 +1,25 @@
+# TeamAngryNerds
+RVCE CISCO Hackathon
+
+Project Title - Smart glasses
+
+With the age of wearable's coming to a rise we think the next revolutionary interface is the 'Smart Glass'. Our idea is to build a smart glass which provides all the  necessary information and updates like notifying you about your friends  birthday or navigating you to that new cupcake store. We use a reflective projection mechanism to display the contents of our OLED screen onto a transparent glass giving you the experience of augmented reality. By choosing lenses of appropriate focal length we make sure the projection is on the top right, while it still is in the person's field of view it doesn't really distract him and rather blends well with reality. While there have been a couple of smart glasses out in the market we're coming up with a new gesture based user interface with haptick feedback making the whole user experience feel like magic.
+
+ Features:
+ 
+1.       Notifications anywhere, anytime. Be it WhatsApp or Facebook, or even the scores of your favourite sports team, get notified and remain updated at all times. All of this and more without having to take your phone out or even moving your head to look down at the screen of your smart watch. Have it all projected right in your field of view, merged into reality.
+
+2.       Fitness monitor: Keeps track of your entire fitness regime all throughout the day, from the number of steps and the calories burnt, to keeping track of your posture (orientation of your head) all the data collected is sent to a cloud based system that does the necessary computation. Your entire progress is tracked, with constant alerts and motivation to work harder, be notified if you fall behind from your set goals. Get all the moral support you can ask for, virtually of course. Have all your data analysed with results put in the form of visualisations to get the review of everything in just a glimpse.  
+
+3.       On the go navigation: Having to constantly look at your phone for the route on maps while driving can be distracting and could potentially lead to accidents, which is a problem that can be easily avoided with our smart glasses. Have the distance with the direction projected right on your field of view, fitting straight into your regular vision, just like playing a video game but this is real. Navigating through places couldn’t have been easier.
+
+4.       Android application: Having to process everything on the glasses itself would take a lot of processing power, which is why we have an android app to do all the hard work instead. The app wirelessly communicates to the smart glasses via Bluetooth 4.0 and provides the necessary back end to support the functionality of all the features of the glasses and also giving us the freedom to expand them to do anything you could wish for. It also includes a user-friendly UI to swipe through the different functions available, such as your health monitor, places to navigate to etc.
+
+5.       User Interface: We have come up with a twin proximity sensor which is used to detect gestures like swipe left, swipe right, select, scroll up and scroll down accompanied with a well synchronised tactile feedback via a vibration actuator ,to alert a gesture being recognised or an incoming notification.
+By building the hardware and the software from scratch we have a flawless blend of everything.
+
+Who said glasses are just for nerds and geeks.
+
+Refer attached drive to understand it better
+
+https://drive.google.com/open?id=0B8KCJoj-34jWVTY4dDNmY01qQVU

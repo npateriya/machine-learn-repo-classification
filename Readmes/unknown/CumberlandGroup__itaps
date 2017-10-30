@@ -1,0 +1,61 @@
+###ITAPS - Improved TAPS App for UCCX
+
+ITAPS is a modification of the Cisco TAPS application used for phone registration on UCCX. This version adds some additional features and cleans up the code in the Cisco ".aef" file. 
+
+**New Features: (as compared to the default Cisco App)**
+
+* Full e.164 Support - Enter your e.164 DNs using the "#" inplace of "+". 
+* Secure PIN - A PIN has been added to secure access to the application.
+* Removed Language Prompt - App uses default system language.
+* Refined overlapping DNs logic - Shared lines have been a killer for using TAPS in many rollouts. While there is some logic in TAPS to get around this, ITAPS adds a better navigation system and through some simple modifications to the BAT import process and the use of unique External Phone Number masks. 
+
+**Install Method #1: (Easy)**
+
+1. Download the ITAPS_AAR.aar file from this repository
+2. Upload it to UCCX just as you would the TAPS_AAR.aar file retrieved from CUCM
+
+*Note: This is tested with UCCX 10.0, 10.5, 10.6. The dependant files in the .aar seem to be fairly static. See the AAR folder for the AAR file source to modify as needed.*
+
+**Install Method #2: (Manual)**
+
+1. Launch the CUCM Admin interface
+2. Download the Cisco TAPS_AAR.aar file
+3. Launch the UCCX Admin interface 
+4. Uploade the TAPS_AAR.aar file to UCCX
+5. Open the Prmpt repository
+6. Locate the prompt directory where the "TAPS" folder has been created
+7. Create new prompts folder called "ITAPS" and then open the folder
+8. Upload the ITAPS_Prompts.zip to this folder. UCCX will uncompress the ZIP file
+9. Open the UCCX Script repository
+10. Upload the ITAPS.aef script (found in AAR_Source/Scripts/default)
+11. Update TAPS application (built by TAPS_AVR.aar file you upoaded earlier) to use the ITAPS.aef script.
+12. Specify CUCM IP Address and PIN
+13. Define a new trigger for this app if you have not already done so.
+14. (suggested) Restart the UCCX Engine on all UCCX nodes in cluster
+
+**Prompts:**
+
+The following are the list of Prompts ITAPS uses along with a brief diaglog contained in the prompt.
+
+* pr_Welcome: Welcome to the Telephony Auto Provision System.
+* pr_EnterPIN: Please enter your PIN followed by the pound or hash key. 
+* pr_EnterDN: Please enter the directory number that should be assigned to this phone followed by the pound or hash key. 
+* pr_EnterDNagain: Please enter the directory number again followed by the pound or hash key.
+* pr_EntryDoesNotMatch: Those entries do not match. Please try again.  
+* pr_ErrorDuplicate: The directory number entered is on a shared line. To identify the device, enter the phone number mask followed by the pound or hash key.
+* pr_ErrorWithCode: The error code reported was...
+* pr_Success: Operation successful. The phone will reboot now. 
+* pr_Invalid_Entry: Invalid entry or time out. Please try again.
+* pr_Error: There was an error performing this operation. 
+* pr_Goodbye: Goodbye
+
+**Error Codes:**
+
+- (0) Successfull
+- (1) Protected DN
+- (2) Incomplete
+- (3) Duplicate DN
+- (5) Not a BAT Device
+- (6) Not an Auto Registered device
+- (7) Not Found
+- (8) Incomplete

@@ -1,0 +1,17 @@
+
+DESCRIPTION
+
+Terminal interface for Cisco router and Cisco PIX firewall emulator Dynamips plus simple linux rc boot script.
+
+FILE
+
+<pre>
+     cisco.sh - Emulator helper.
+cisco-boot.sh - Sys-V init file.
+</pre>
+
+CONTACT
+
+Author: richard_bruna@nm.cz<br>
+Source: https://github.com/KyomaHooin/dynamips
+

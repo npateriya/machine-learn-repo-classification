@@ -1,0 +1,46 @@
+# Suggeritore Cisco
+
+Suggeritore Cisco is a lightweight, "Internetless" program that helps you in CCNA exams (and not only them) by answering questions.
+
+# Features
+
+ - Hidden from Task manager application tab
+ - Named as conhost.exe (Host windows console)
+ - Just a popup!
+ - Select and copy the question, the popup will appear when you press the middle button.
+
+Suggeritore Cisco is still in development, but it is usable!
+Some chapter are missing... you can help me by sending pull requests!
+
+# Demo
+
+#### Popup
+![demoGif](https://github.com/ADeltaX/Suggeritore-Cisco/blob/master/demos/demo.gif "Program in action")
+
+#### Low RAM usage
+![demoRamUsage](https://github.com/ADeltaX/Suggeritore-Cisco/blob/master/demos/ram%20usage.png "Low RAM Usage")
+
+# How to use it:
+
+1) Keep it as conhost.exe
+2) Launch it
+3) Press CTRL+D
+4) Select a chapter
+5) Select a question and copy it
+6) Keep pressing the middle button to show the suggestion popup or press ALT+Z (press it again to hide the popup)
+7) When you finished, close it by pressing CTRL+ALT+F4
+8) PROFIT!!1!1!
+
+# Upcoming changelog
+
+- Adding other chapters
+- Completely in english
+- Some refactors
+- Bugfix (?)
+- Complete documentation
+
+# License
+MIT
+
+---
+#### Made with <3 by ADeltaX from Italy

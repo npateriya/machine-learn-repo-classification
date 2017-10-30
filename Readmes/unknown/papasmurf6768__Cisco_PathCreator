@@ -1,0 +1,23 @@
+Welcome to Path Creator.
+
+https://github.com/papasmurf6768/Cisco_PathCreator
+
+Authors: Chris Savoca, Tom Bruzek
+
+Path Creator is a tool that can be used to test every state transition in the ticketing management process.  It will take in the list of ticket states and their next states from a .csv file and create a set of paths from the logical starting ticket state to a logical end ticket state that consists of every possible ticket state transition at least once.  It then saves these paths to another .csv file for easy copying/pasting.
+
+How To Use:
+
+1. Download the .zip file. It contains the compiled executable, a few required .dll files, and a demo .csv
+2. Make sure that any files you wish to create paths for are located in the same directory as the executable
+3. Run the executable
+4. When prompted, enter the filename of your .csv file, including the file extension (.csv) and hit enter
+5. When prompted, enter the name of the logical starting state for any tickets and hit enter. (Make sure this is syntactically identical to the name in your file)
+6. After the program runs to completion, check the file directory for a file named path_table.csv, this is where your results will be
+
+Troubleshooting:
+
+1. If the list of paths seems short or you notice a transition is not covered:  Check the syntax of your file and make sure that all state names appear the same throughout the file.  Column A should contain only current states, column B should contain only next states, each on their own line within the cell.
+2. If there are states missing, make sure that the title in cell A1 is "ticket type"-Current State and the title in cell A2 is "ticket type"-Next States.
+3. End states that have no next states they can reach should have "N/A" in the corresponding Next State cell.                               
+4. If the output in path_table.csv looks odd and includes " , or \ characters, try converting your .csv file back to a generic excel file (.xlsx) and then convert back to a .csv again.

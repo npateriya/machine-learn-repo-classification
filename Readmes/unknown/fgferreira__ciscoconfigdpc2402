@@ -1,0 +1,36 @@
+# ciscoconfigdpc2420
+
+LINUX- UBUNTU
+
+Como configurar CISCO DPC2420 en caso de que aparezca la siguiente leyenda
+
+This feature is not enabled.
+
+This feature has not been enabled in your cable modem.
+
+To exit this page, chose any of the other tabs or click on the "Back" button on your browser tool bar to return to the previous page.
+
+1- 
+Abrimos una terminal y escribimos 
+
+sudo apt-get install curl
+sudo apt-get update
+
+2-
+Abrimos el navegador y escribimos nuestra puerta de enlace predeterminada y nos aparecera el login al router, los datos de fabrica son...
+Usuario: admin
+Contraseña: W2402 (La W en mayuscula)
+
+3-
+Desconectamos el cable coaxil de nuestro router..
+En la terminal pegamos la siguiente linea
+
+4-
+sudo curl -d "SAHttpAccessAdv1=1" "http://192.168.0.1 (<--ESTA ES SU PUERTA DE ENLACE) /goform/techsupport.asp"
+Ponemos nuestra contraseña de usuario root
+SI TIRA ERROR, INTENTEN DE NUEVO
+
+5-
+Vamos al navegar y apretamos F5. Ya tendrian que poder editar tranquilamente todo. 
+
+PD: Una vez que terminen y conecten el coaxil ya deberan repetir desde el paso  3 para volver a editar.

@@ -1,0 +1,6 @@
+# cisco-network-automation
+Automate configuration to multiple device
+utilizing ssh to configure multiple devices.
+baseline network automation.
+credits to ktbyers for netmiko
+edited version

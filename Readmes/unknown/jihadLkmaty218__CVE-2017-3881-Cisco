@@ -1,0 +1,8 @@
+# CVE-2017-3881 Cisco Catalyst RCE Proof-Of-Concept
+ Apr 10, 2017
+
+Do you still have telnet enabled on your Catalyst switches? Think twice, here’s a proof-of-concept remote code execution exploit for Catalyst 2960 switch with latest suggested firmware. Check out the exploit code here. What follows is a detailed write-up of the exploit development process for the vulnerability leaked from CIA’s archive on March 7th 2017 and publicly disclosed by Cisco Systems on March 17th 2017. At the time of writing this post there is no patch available. Nonetheless there is a remediation - disable telnet and use SSH instead.
+# Vault 7 CIA leak
+A series of CIA’s documents were leaked on March 7th 2017 and published on WikiLeaks. Among other publications there was an interesting preauth code execution vulnerability that affected multiple Cisco switches. This vulnerability is code-named ROCEM in the leaked documents. Although very few technical details were mentioned, few things stand out.
+
+The Vault 7’s documents shed a light on the testing process for the actual exploit. No exploit source code is available in the leak. Two use cases are highlighted there - the tool can be launched in either interactive mode or set mode. The interactive mode sends the payload via telnet and immediately presents the attacker with command shell in the context of the same telnet connection. Quote from the doc:

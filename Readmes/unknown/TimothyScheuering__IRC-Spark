@@ -1,0 +1,12 @@
+Table Structure Notes:
+
+```json
+{"roomId":{
+  "myUserName":"USERNAME",
+  "myPassword":"PASSWORD",
+  "myServer":"MYSERVER",
+  }
+}
+```
+
+May need to add internal passwords and user registration upon new room to title bot's a new name.

@@ -1,0 +1,18 @@
+# llama
+
+A Python SDK for network device operating systems et. al. ![Llama on](http://orig05.deviantart.net/fee3/f/2010/094/f/d/llama_walk_by_taquito143.gif)
+
+### Examples
+
+```python
+>>> import llama
+>>> params = dict(host='192.168.1.97', password='Cisco', user='cisco')
+>>> with llama.client('CiscoIOS', **params) as client:
+...   for interface in client.interfaces.all():
+...     print(interface)
+...
+<Interface: BVI1>
+<Interface: Dot11Radio0>
+<Interface: Dot11Radio1>
+<Interface: FastEthernet0>
+```

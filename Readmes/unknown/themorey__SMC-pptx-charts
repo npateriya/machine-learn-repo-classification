@@ -1,0 +1,10 @@
+# SMC-pptx-charts
+Use Cisco Stealthwatch Management Console to pull network utilization data and create PPTX slides with charts
+
+Files:
+SMC_Netflow.py --> Master program to login to SMC and pull data
+SMC_Netflow_from_json_file.py  -->  use data captured in json file SMC_REST_data.json rather than pulling live from SMC
+SMC_REST_data.json  -->  file containing output from SMC REST call over a 15 min time period (3 samples @ 5min)
+DAO_Utilization_AS_template_master.pptx  -->  PPT template file with known slide layouts and placeholders for building slides
+DAO_SMC_pptx_placeholders.txt  -->  python script and output showing layouts and placeholders for DAO_Utilization_AS_template_master.pptx
+

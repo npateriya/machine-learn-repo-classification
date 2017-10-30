@@ -1,0 +1,39 @@
+# firestream v0.0.3
+### Purpose
+firestream is a tool for visualizing syslog *Teardown* events on **Cisco ASA firewalls**.  It was created at [Fayetteville State University](https://www.uncfsu.edu) (Fayetteville, NC), to provide a near-real-time look of traffic traversing the network.
+
+[//]: # (![Screenshot](screenshot.png))
+### Installation
+firestream requires the [PyGame](http://www.pygame.org) library.
+After downloading, simply run:
+
+	python firestream.py
+
+### Usage
+When firestream starts it will begin displaying tracks as soon as it receives *Teardown* events that also contain a *duration*.  Each rectangle descending down the screen is a track.
+
+**Up/Down Arrow Keys**: will tick up or down the *FPS* (frames per second) setting of the configuration file (**firestream.cfg**), thus speeding up or slowing down track movement.
+
+**W/S Key**s: Pressing the *W* key will increase the size of tracks, while *S* will decrease it.  Track length is calculated by the *duration* field of the syslog event message.  W and S tick up or down the *SCALE* setting of the configuration file, which is a percentage of the original length.
+
+Pressing any of the above keys will also print out a message in the console/terminal.  Clicking on any track will print out the full syslog event message for that track.
+
+### Display Settings
+Window size is determined by the *width* and *height* *firestream.cfg* settings.
+
+You can also change the background color and track color by setting *backcolor* and *trackcolor*, respectively. 
+
+### Tracking
+firestream can track IP addresses and ports by applying a different color to the track.  These are set under the *Tracking* section of *firestream.cfg* (*iptrack*, *porttrack*).
+
+Setting *bytesgreater* with a value greater than zero will mark tracks that exceed this value in the *bytes* field of the syslog message.
+
+RGB colors for the above can be defined in *ipcolor*, *portcolor*, and *bytescolor*. 
+
+### Notifications
+
+A notification sound will be played when any of the tracking parameters is triggered.  The sound can be configured in the *sound* setting under the *Notifications* section of *firestream.cfg*.
+
+
+
+

@@ -1,0 +1,11 @@
+Cisco UCM call detail report - Python Flask.
+
+The aim of the project is to provide web interface for call details.
+The cron script parses CDR files from FTP directory and puts values to MySQL database.
+
+First of all, you need to configure CUCM to export CDR files into FTP directory.
+Then put /scripts/csv2sql.py on CRON. Make sure that database gets filled.
+
+cd /usr/lib/python2.7/site-packages/flask_simpleldap/__init__.py
+initialize
+conn.set_option(ldap.OPT_REFERRALS, 0)

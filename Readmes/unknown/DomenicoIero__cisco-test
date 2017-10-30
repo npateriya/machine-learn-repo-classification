@@ -1,0 +1,13 @@
+# cisco-test
+
+I have created a maven project using github api, imported in the dependency to interact with GitHub.
+
+Due to the simplicity of the task I have created only one class with a main.
+ 
+This class need as input the GitHub credentials (that I will send you via mail) and create an instance of the class GitHub.
+
+Through this class I am able to retrieve the target repository and check for every pull request if is present a comment structured as: @bot say-hello.
+
+If is present at least a comment of this kind I answer with: hello world.
+
+The target repository is the same in which the project is pushed.

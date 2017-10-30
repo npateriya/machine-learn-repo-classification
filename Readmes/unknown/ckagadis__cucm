@@ -1,0 +1,11 @@
+Author's Note:
+--------------
+BEFORE USING ANY CODE IN THESE SCRIPTS, READ THROUGH ALL FILES THOROUGHLY, UNDERSTAND WHAT THE SCRIPTS ARE DOING AND TEST THEIR BEHAVIOR IN AN ISOLATED ENVIRONMENT.  RESEARCH ANY POTENTIAL BUGS IN THE VERSION OF THE SOFTWARE YOU ARE USING THESE SCRIPTS WITH AND UNDERSTAND THAT FEATURE SETS OFTEN CHANGE FROM VERSION TO VERSION OF ANY PLATFORM WHICH MAY DEPRECATE CERTAIN PARTS OF THIS CODE.  ANY INDIVIDUAL CHARGED WITH RESPONSIBILITY IN THE MANAGEMENT OF A SYSTEM RUNS THE RISK OF CAUSING SERVICE DISRUPTIONS AND/OR DATA LOSS WHEN THEY MAKE ANY CHANGES AND SHOULD TAKE THIS DUTY SERIOUSLY AND ALWAYS USE CAUTION.  THIS CODE IS PROVIDED WITHOUT ANY WARRANTY WHATSOEVER AND IS INTENDED FOR EDUCATIONAL PURPOSES.  
+
+Welcome to my Cisco Unified Communications Manager (CUCM) Repo
+--------------------------------------------------------------
+Cisco collaboration products have improved quite a bit in the past 10 years.  Besides the consistent increase in features and stability, Cisco has also made it a pretty accessible system for programmers to write their own solutions for.  There are many products in the market that help address customer needs like Call Detail Record (CDR), call recording, and wallboard systems - these products access CUCM with the same APIs that can be leveraged by any programmer.
+
+This repo is a collection of methods to help get a programmer (expert or aspiring) started off in writing their own solutions for CUCM.  For example, if you've ever wanted to write a php script to view voice gateway activity, the "voiceGateWayStats" project can help.  It explains the basic idea behind authenticating to CUCM, which question to ask and how to ask it, and finally what to do with what CUCM gives you.  Or, if you've ever wondered how to write a script to connect to Windows environment via secure LDAP, which in turn can be used in a larger project for CUCM, then the "ldap" project may be useful.  
+
+I will continue to add new projects to this repo as time permits.  If you have any questions or suggestions please let me know.

@@ -1,0 +1,19 @@
+# LComNET
+LComNET it's a simple program that provides, through a convenient GUI, a command list used by cisco equipment such as switches and routers.
+
+### Install
+* Install Ruby
+``` https://www.ruby-lang.org/en/documentation/installation/ ```
+* Update rubygems from the [site](https://rubygems.org/pages/download) or use the gem in the folder *Utility*! How?
+  - from the terminal reach *Utility* folder 
+  - ``` gem install rubygems-update-2.4.5.gem ```
+  - ``` rubygems_update ```
+* Install ubuntu font contained in the same folder
+* Always from terminal navigate to the root (LComNET/) and launches these commands
+  - ``` gem install bundler ```
+  - ``` bundler install ```
+* Now LComNET is installed. To run it uses ``` ruby init.rb ``` or rename ``` init.rb to init.rbw ``` and then double click on it
+
+##### Version
+- Software : ``` 1.0.2 ```
+- CommandsFile : ``` 0.1.4 ```

@@ -1,0 +1,25 @@
+## Envrionment Setup
+
+I'm currently using Centos 7, with qemu-kvm and openvswitch. For openvswitch, I'm using the RDO repo, which you can find at
+http://openstack.redhat.com. 
+
+After I've installed the qemu / libvirt packages, I create a symbolic link:
+
+```
+ln -s /usr/libexec/qemu-kvm /usr/bin/qemu-kvm
+```
+
+For OVS, at the very least, you need to create two bridges.
+
+```
+ovs-vsctl add-br ovs-br0 -- set Bridge ovs-br0 stp_enable=true
+ovs-vsctl add-br ovs-br1 -- set Bridge ovs-br1 stp_enable=true
+```
+
+I have some pre-created ifup scripts for ovs. Move them into place.
+
+``` 
+cp ~/netlab-scripts/templates/ovs-scripts/ovs{0,1}-ifup /usr/local/sbin/
+```
+
+I'm currently also using VXLAN and OpenFlow support with pretty good success.

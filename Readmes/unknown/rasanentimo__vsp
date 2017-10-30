@@ -1,0 +1,7 @@
+# VPN session parser
+This script will analyze the status of the VRF aware IPsec sessions based on the output of 'show ipsec sessions' command and add the information of each connection to influxdb. Script called 'vpn_session_report_generator.py' will read the data from the db and present it in excel format.
+
+Here's couple of screenshots of the data in Grafana;
+
+![all tunnels](grafana_influx_all_tunnels.PNG)
+![single tunnel](grafana_influx_single_tunnel.PNG)

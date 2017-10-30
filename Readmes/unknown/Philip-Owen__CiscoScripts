@@ -1,0 +1,9 @@
+
+##telnet-cisco.py
+
+This is basic telnet script used execute and receive the output of commands sent to a device. The base of this script was taken directly
+from the Python telnetlib (https://docs.python.org/2/library/telnetlib.html) site. The main reason that I uploaded this script was to
+create some visibility on a topic that I found pretty hard to find any true, working examples of. I have left a bunch of comments in the 
+script and I hope that they may be helpful to anyone trying to learn how to automate network tasks. 
+
+If I got anything wrong please let me know!

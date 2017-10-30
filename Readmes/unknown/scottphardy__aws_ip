@@ -1,0 +1,6 @@
+# aws_ip
+Template for adding AWS IPv4 Ranges to Cisco ASA as an object-group
+
+1. Run 'runfirst.sh' first
+2. Update myhosts file with list of hosts to run playbooks against
+3. Update playbooks with correct .json file to reference for json body.  Currently it references test.json

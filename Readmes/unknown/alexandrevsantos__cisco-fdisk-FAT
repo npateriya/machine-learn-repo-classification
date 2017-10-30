@@ -1,0 +1,4 @@
+it is a how to partition and format a compactflash disk for cisco router/ASA
+
+sudo fdisk /dev/device < fdisk.in
+

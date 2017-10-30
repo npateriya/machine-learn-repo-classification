@@ -1,0 +1,14 @@
+# CUCM Update DN App
+Python Tkinter App to Update Cisco CUCM Diretory Numbers (Useful for remapping DN's to E164)
+
+### Create Virtual Enviroment with pynenv
+* pyvenv myenv or python3.6 -m venv myenv
+* source myenv/bin/activate
+* cd myenv
+
+### Update pyvenv.cfg
+* include-system-site-packages = true
+
+### Compile with py2app
+* rm -rf build dist
+* python setup.py py2app

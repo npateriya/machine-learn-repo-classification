@@ -1,0 +1,48 @@
+![parcli](https://raw.github.com/tmm3/parcli/master/logo.png)
+# Install [![Build Status](https://travis-ci.org/tmm3/parcli.png)](https://travis-ci.org/tmm3/parcli)
+go get -u github.com/tmm3/parcli
+# Model
+Parcli builds a data structure from a cisco ios-style cli *runnning-config* using a relational data model. By leveraging this model, together with the provided methods, parcli enables the ability to easily parse data from thousands of configs. 
+```
+parent
+ child
+  grandchild
+```
+
+# Example
+Simply define your data set, scope, and keyword - partial match is default w/ optional regex for exact or variable match.
+```go
+package main
+
+import "github.com/tmm3/parcli"
+
+func main() {
+        //read in config lines
+        config := parcli.New(cfg)
+        //return all policy-maps that contain class P1
+        p_w_c  := config.ParentsWithChild("policy-map", "^class.P1$")
+        //return all policy-maps that don't contain class P1
+        p_wo_c := config.ParentsWithOutChild("policy-map", "^class.P1$")
+}
+```
+
+# Reference [![GoDoc](https://godoc.org/github.com/tmm3/parcli?status.svg)](https://godoc.org/github.com/tmm3/parcli)
+For reference see the unit test file [parcli_test.go](parcli_test.go) or [godoc](https://godoc.org/github.com/tmm3/parcli).
+
+# License [![](https://img.shields.io/badge/License-Apache2-blue.svg)](https://img.shields.io/badge/License-Apache2-blue.svg)
+Apache License 2.0. See [LICENSE](LICENSE)
+
+DISCLAIMER
+----------
+Please note: All scripts/tools/librarys in this repo are released for use "AS IS" **without any warranties of any kind**,
+including, but not limited to their installation, use, or performance.  I disclaim any and all warranties, either 
+express or implied, including but not limited to any warranty of noninfringement, merchantability, and/ or fitness 
+for a particular purpose.  I do not warrant that the technology will meet your requirements, that the operation 
+thereof will be uninterrupted or error-free, or that any errors will be corrected.
+
+Any use of these scripts, tools, and librarys is **at your own risk**.  There is no guarantee that they have been through 
+thorough testing in a comparable environment and I am not responsible for any damage or data loss incurred with 
+their use.
+
+You are responsible for reviewing and testing any scripts you run *thoroughly* before use in any non-testing 
+environment.

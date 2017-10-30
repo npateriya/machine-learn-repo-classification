@@ -1,0 +1,8 @@
+# flookup
+Find matched policy for Fortigate FW. Cisco ASA packet-tracer equivalent in Fortigate Firewall
+
+
+Usage: Please specify username, FortiGate address and VDOM (default to root if not specified) 
+
+eg. ./flookup.py admin@1.1.1.1 root
+

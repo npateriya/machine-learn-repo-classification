@@ -1,0 +1,20 @@
+# get-inventory
+Inventory Tool for Cisco UCS Server environments.
+
+Overview:
+This script provides basic inventory for UCS Manager and Cisco Integrated Management Controller. The script will prompt for IP address, user name and password.  Prior to running this script, ensure you have a “Reports” directory (case sensitive) in the same folder as the get-inventory script. The file cannot be created without it. Script may be updated at a later date to try to create it if it does not exist. 
+
+Your report will be date time stamped in the Reports directory when complete.
+
+This script provides example methods of using XML to generate reports using python scripting. This script minimizes additional components in order to ensure wider usability. No UCS SDK components are required for this script as it uses mini.dom for processing XML. 
+
+Compatibility:
+No warranty is provided with this script, but the script as provided has been found to work on UCS Manager 2.2 and 3.1 (various versions) and with Cisco Integrated Management Controller versions in the 2.0 family of firmware. 
+
+Execution:
+run get-Inventory.py to run script.
+
+Future possible changes under consideration:
+FEX information for devices directly connected to the fabric interconnects.
+Report folder creation
+Command line switches for user names and the server IP to simplify execution.

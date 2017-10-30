@@ -1,0 +1,10 @@
+wlcqa
+=====
+
+Cisco Wilress LAN Controller - Purpose Built Config Parser
+
+An old script to parse through the WLC config and print out the HREAP VLAN settings. Used for QA purposes.
+
+Can be extended and maintained for other purposes. The parsing logic is pretty barbaric, so it can defaintely be updated.
+
+Developed on ActiveState Perl in Windows 8. Down, extract, and run from Windows command line. Should port to *nix.

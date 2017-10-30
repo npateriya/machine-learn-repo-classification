@@ -1,0 +1,13 @@
+# acler
+
+Acler is a Python 2.6+ script (and local modules) to read a file of non-extended Cisco ACL permit entries and return a results file with info about whether/not netflow records associated with the entries had traffic.
+
+The script parses the Cisco ACL entries, creates a SiLK set file, pulls a SiLK working file from the repo into a temp folder based on the set file, reads the working file and runs the ACL criteria against each record of the working file, both forward (the way the ACL was written) and reversed (with the criteria flipped), keeping track of forward and reverse bytes, packets, and records. Just in case the script gets killed prior to completion, a so-far aggragate output of the results is produced after the first hour of testing and after testing each day. If subsequent outputs are successfully written, the previous output file is deleted. The output CSV file will contain the original CSV input file information and information about the traffic seen, to include the average bytes/packet for forward and reversed traffic seen. Once some traffic is seen for an ACL, it is removed from subsequent searches/comparisons in an effort to reduce the size of repo pull files and speed up the processing of subsequent rwfilter/rwuniq comparisons. The output file will indicate how many days it took to find traffic or not. For example, if we ran the script for 14 days and it took until the 13th day to find some traffic for the ACL, the output would include 13D. If no traffic was found, the record should indicate No Traffic 14D. Just in case the ACL may include very heavy, constant talkers, the script will check the first hour of traffic for the first day of the test only, to prevent pulling massive repo files. In this case, you'll see 1H (one hour) listed for traffic found in that first hour.
+
+The idea is to use this script to help inform security policy folks during routine ACL cleanup cycles. If there is traffic, then perhaps the ACL is still needed, but if not, perhaps it's OBE (overcome by events).
+
+See the acler.py -h for help.
+
+The input CSV file MUST have integer line numbers in the first column for line number tracking purposes. If yours doesn't, you may use the csv_add_int.py script to automatically add those prior to using acler.py. The line numbers are needed so that in the case where the script get's killed during processing (by admin, by reboot, etc), the user can use the aggragate output file, grep out only the "No Traffic" lines into a second file, and use that file to process those records for the remaining days that were not assessed. Then, the user can cat the two results files together to reassemble all results.
+
+SiLK: https://tools.netsa.cert.org/silk/index.html

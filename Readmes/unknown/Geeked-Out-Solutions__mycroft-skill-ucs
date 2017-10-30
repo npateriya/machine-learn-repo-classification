@@ -1,0 +1,19 @@
+# UCS Skill
+
+This skill will provide information about your UCSM infrastructure, including firmware, server associations, and more.
+
+To get this done we need
+  - ucsmsdk
+
+# Installation/Setup
+
+
+
+## Current state
+
+
+
+Known issues:
+ - ...
+
+TODO:

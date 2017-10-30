@@ -1,0 +1,31 @@
+CISCO Training example
+======================
+
+Run `npm install` before first application run.
+
+## Commands:
+
+**`npm run build:client`**:
+  compiles client application. The client application can be compiled and refreshed without stopping running static server.
+
+**`npm run start:server`**:
+  builds and starts simple static server.
+
+## Used technologies
+- **typescript**: all source code for front-end and backend are written in typescript.
+
+- **angular 2**: The frontend client is written with `angular 2` framework. There is only one module for this demo purposes: the app.
+
+- **rxjs**: Front-end use stream oriented library to propagate state changes across all components. The master of true is `EmployeeStore` which dispatch state changes and provides methods to perform such changes on data.
+
+- **d3js**: Library used for graph components.
+
+- **bootstrap 3**: Bootstrap layout used for the UI.
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+# tcsvideos
+
+The Cisco TelePresence Content Server is annoying! Especially if you want to
+watch videos on it and especially if you want to watch them in 2x speed and
+especially if you want to watch not just one of them and especially if the
+videos are divided in topics and you may only want to watch one of the topics.
+
+Give the power back to the user!
+
+#### 1. Install the executable.
+```
+python3 setup.py install --user
+```
+#### 2. Setup an sqlite database with the schema that is available in the repository.
+```
+sqlite3 ./metadata.db < ./schema.sql
+```
+
+#### 3. Configure a [config file](example.yml).
+
+#### 4. Make sure your destination directory exists.
+```
+mkdir -p ~/multimedia/tcsvideos/
+```
+
+#### 5. Download all videos. (You probably don't want to do that)
+```
+tcsvideos ./tcsconfig.yml '%'
+```
+
+I don't look forward to extend or maintain this project. Therefore maintainers
+are welcome!
+
+## TODO
+
+* Ehhh... tests!!!!

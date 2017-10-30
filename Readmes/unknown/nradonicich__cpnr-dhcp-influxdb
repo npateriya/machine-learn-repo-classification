@@ -1,0 +1,286 @@
+# CPNR DHCP Telemetry Poller
+
+## Description
+
+In-house developed telemetry poller for Cisco Prime Network Registrar (CPNR) that will write out metrics to InfluxDB.
+
+The data is collected via the REST API interface on the CPNR server and uses the following services
+
+- `web-services/rest/resource/CCMFailoverPair`
+
+  - used to gather the _Provisioning Group_
+
+- `web-services/rest/stats/DHCPServer?nrClass=`
+
+  - uses subservices (nrClass) `DHCP6Stats`, `DHCPServerActivityStats`, `DHCPFailoverStats` to gather the metrics
+
+## Installation
+
+### Required Dependancies
+
+#### Perl Modules
+
+- EV
+- AnyEvent
+- AnyEvent::HTTP
+- AnyEvent::InfluxDB
+- JSON::MaybeXS
+- Config::JSON
+- MIME::Base64
+- Getopt::Long
+- Data::Dump
+
+#### Firewall requirements
+
+- `ICMP` to DHCP Hosts
+- `8080/TCP` or `8443/TCP` to DHCP Host REST API
+- `8086/TCP` to InfluxDB Host or InfluxDB Load Balancer
+
+### Clone Repository
+
+- install repository to /opt/influx_scripts (or modify service unit file to match)
+
+  ```sh
+  cd /opt/influx_scripts
+  git clone https://git.repo/cpnr-dhcp-poller/cpnr-dhcp-poller
+  ```
+
+### Systemd Service Unit
+
+- Copy `cpnr-dhcp-poller.service` file from project folder to `/etc/systemd/system/`
+- Run
+
+  - `systemctl daemon-reload`
+  - `systemctl enable cpnr-dhcp-poller.service`
+  - `systemctl start cpnr-dhcp-poller.service`
+
+## Configuration
+
+### `config.json` file
+
+- The config file is written in JSON format for ingest into the script via _Config::JSON_
+- Sample config file can be seen below.
+
+  - Hosts are contained inside _hosts_ array with properties _host_ for hostname and _tags_ for the appropriate tags for the entry
+  - InfluxDB _host_ and _port_ is contained in the _influx_ object
+  - CPNR REST API authentication is contained in the _username_ and _password_ propertyNames
+
+    ```json
+    {
+      "hosts": [
+                 {
+                   "host" : "hostname.domain.name",
+                   "tags" : { "datacenter": "dc-a", "region" : "ON", "env" : "lab", "service" : "dhcp" }
+                 },
+                 {
+                   "host" : "hostname2.domain.name",
+                   "tags" : { "datacenter": "dc-b", "region" : "QC", "env" : "prod", "service" : "dhcp" }
+                 }
+      ],
+      "influx": {
+        "port" : 8086,
+        "host" : "influxdb.domain.name"
+      },
+      "username": "dhcp.api.user",
+      "password": "dhcp.api.pass"
+    }
+    ```
+
+## Running
+
+### Testing a configuration
+
+- Run script with the `--test-config` option from the CLI. This will cause the script to read the new config, run once, and pretty print a JSON Object of the data that would be written to InfluxDB to be checked that data is correct for the changes made. This is mainly for testing the changes to the hosts, to test other changes it may be better to test this first then check the data populated to the database manually on scheduled runs.
+
+### Scheduling/Daemonizing
+
+- See [Systemd Service Unit](#Systemd Service Unit)
+- Verify is Running
+
+  - `ps aux | grep cpnr-dhcp-poller`
+  - Login to Grafana, InfluxDB, or Chronograf and select measurement/values to ensure writing to db
+
+### Restarting after configuration change
+
+- `systemctl reload cpnr-dhcp-poller.service`
+
+  - This is a hard reload and you may lose some data if it is in the polling process (safest to run between 30-59seconds in the minute on the hosting system)
+
+## InfluxDB Database Structure
+
+RP - Retention Policy | M - measurement | T - tags | F - fields
+
+```text
+DB provisioning
+  RP autogen -> 0s
+    SGDuration -> 168h0m0s
+    Default -> false
+  RP 5y2w_ap -> 44184h0m0s
+    SGDuration -> 168h0m0s
+    Default -> true
+  M DHCP6Stats -> 12
+    T datacenter -> 1
+    T env -> 1
+    T host -> 6
+    T pg -> 3
+    T region -> 2
+    T service -> 1
+    F activeLeasequeries -> float
+    F activeLeasequeryData -> float
+    F activeLeasequeryDone -> float
+    F activeLeasequeryReplies -> float
+    F activeLeases -> float
+    F advertises -> float
+    F allocatedLeases -> float
+    F authFails -> float
+    F bulkLeasequeries -> float
+    F bulkLeasequeryData -> float
+    F bulkLeasequeryDone -> float
+    F bulkLeasequeryReplies -> float
+    F clientClassFails -> float
+    F clientReservedActiveLeases -> float
+    F clientReservedLeases -> float
+    F confirms -> float
+    F declines -> float
+    F discards -> float
+    F droppedTotal -> float
+    F duplicates -> float
+    F graceExpirations -> float
+    F infoRequests -> float
+    F invalidClients -> float
+    F invalidPackets -> float
+    F leasequeries -> float
+    F leasequeryReplies -> float
+    F offerTimeouts -> float
+    F otherServer -> float
+    F overMaxWaiting -> float
+    F packetsReceived -> float
+    F packetsReceivedRelay -> float
+    F packetsSent -> float
+    F packetsSentRelay -> float
+    F queueLimitedSolicitsDropped -> float
+    F rebinds -> float
+    F reconfigures -> float
+    F releases -> float
+    F renews -> float
+    F replies -> float
+    F requestDroppedOld -> float
+    F requestDroppedOthers -> float
+    F requests -> float
+    F reservedActiveLeases -> float
+    F reservedLeases -> float
+    F responseDroppedOld -> float
+    F responseDroppedOthers -> float
+    F solicits -> float
+    F tcpConnectionsDropped -> float
+    F tcpCurrentConnections -> float
+    F tcpLqStatusCatchUpComplete -> float
+    F tcpLqStatusDataMissing -> float
+    F tcpLqStatusMalformedQuery -> float
+    F tcpLqStatusNotAllowed -> float
+    F tcpLqStatusNotConfigured -> float
+    F tcpLqStatusQueryTerminated -> float
+    F tcpLqStatusUnknownQuery -> float
+    F tcpLqStatusUnspecFail -> float
+    F tcpTotalConnections -> float
+    F totalPrefixes -> float
+    F unknownLinks -> float
+  M DHCPFailoverStats -> 12
+    T datacenter -> 1
+    T env -> 1
+    T host -> 6
+    T pg -> 3
+    T region -> 2
+    T service -> 1
+    F bindingAcksReceived -> float
+    F bindingAcksSent -> float
+    F bindingUpdatesReceived -> float
+    F bindingUpdatesSent -> float
+    F stateReceived -> float
+    F stateSent -> float
+  M DHCPServerActivityStats -> 12
+    T datacenter -> 1
+    T env -> 1
+    T host -> 6
+    T pg -> 3
+    T region -> 2
+    T service -> 1
+    F acks -> float
+    F acksPerSecond -> float
+    F activeLeases -> float
+    F bootpReceived -> float
+    F bootpSent -> float
+    F clientClassFails -> float
+    F clientReservedActiveLeases -> float
+    F clientReservedLeases -> float
+    F configuredLeases -> float
+    F decayingMaxRequestBuffersInUse -> float
+    F declines -> float
+    F discards -> float
+    F discovers -> float
+    F droppedTotal -> float
+    F duplicates -> float
+    F extensionDrops -> float
+    F extensionErrors -> float
+    F graceExpirations -> float
+    F informs -> float
+    F invalidClients -> float
+    F invalidPackets -> float
+    F leaseQueries -> float
+    F leaseQueriesActive -> float
+    F leaseQueriesUnassigned -> float
+    F leaseQueriesUnknown -> float
+    F naks -> float
+    F offerTimeouts -> float
+    F offers -> float
+    F overMaxWaiting -> float
+    F packetsDropped -> float
+    F packetsReceived -> float
+    F packetsSent -> float
+    F queueLimitedDiscoversDropped -> float
+    F releases -> float
+    F requestBuffersAllocated -> float
+    F requestBuffersInUse -> float
+    F requestDroppedOld -> float
+    F requestDroppedOthers -> float
+    F requests -> float
+    F reservedActiveLeases -> float
+    F reservedLeases -> float
+    F responseBuffersAllocated -> float
+    F responseBuffersInUse -> float
+    F responseDroppedOld -> float
+    F responseDroppedOthers -> float
+    F responsesDropped -> float
+    F tcpActiveLeaseQueries -> float
+    F tcpBulkLeaseQueries -> float
+    F tcpConnectionsDropped -> float
+    F tcpCurrentConnections -> float
+    F tcpLqActive -> float
+    F tcpLqDone -> float
+    F tcpLqStatus -> float
+    F tcpLqStatusCatchupComplete -> float
+    F tcpLqStatusConnectionActive -> float
+    F tcpLqStatusDataMissing -> float
+    F tcpLqStatusMalformedQuery -> float
+    F tcpLqStatusNotAllowed -> float
+    F tcpLqStatusQueryTerminated -> float
+    F tcpLqStatusUnspecFail -> float
+    F tcpLqUnassigned -> float
+    F tcpTotalConnections -> float
+    F timeouts -> float
+    F totalScopes -> float
+    F unknownScopes -> float
+  M dhcp_counters -> 1
+    T datacenter -> 1
+    T env -> 1
+    T host -> 1
+    T region -> 1
+    T service -> 1
+    F totalAcks -> float
+    F totalDeclines -> float
+    F totalDiscovers -> float
+    F totalNaks -> float
+    F totalOffers -> float
+    F totalReleases -> float
+    F totalRequests -> float
+```

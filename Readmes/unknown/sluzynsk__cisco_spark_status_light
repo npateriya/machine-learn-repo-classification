@@ -1,0 +1,16 @@
+# Status Light for Cisco Spark
+
+## Description
+
+This is a status light, built on an ESP8266 and an Adafruit NeoPixel ring.
+Every second, it queries the Cisco Spark API for your current status -
+Active, Inactive, or Do Not Disturb - and changes the animation on the ring to match.
+
+## Installation
+
+Edit the file to include your Cisco Spark developer token at the top of the file.
+This token can be retrieved by signing into [Cisco Spark Developer](https://developer.ciscospark.com)
+and clicking on your picture at the upper right. Save the file and write it to your ESP8266.
+
+The NeoPixel ring should be attached to pin D2 (GPIO4) on the ESP module along
+with appropriate power and ground.

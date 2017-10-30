@@ -1,0 +1,2 @@
+# Infinite-Toolkit---Learning-Labs
+In this repository, various basic examples, samples apps and explanations to start using the REF API in order to develop your own cloud client using digital TV services. Once you're connected to Cisco sandbox, the client application has access to Live channel list, vod catalogue, booking and recording features..

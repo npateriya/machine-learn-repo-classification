@@ -1,0 +1,8 @@
+# Cisco-command-manual
+This repo includes most common cisco commands with explanation
+
+|Parameter type|Syntax|
+|:------------:|:----:|
+|Required      |\<parameter>|
+|Optional      |[parameter] |
+|Option        |{option}    |

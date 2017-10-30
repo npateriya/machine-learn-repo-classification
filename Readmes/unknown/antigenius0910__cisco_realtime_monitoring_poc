@@ -1,0 +1,166 @@
+# cisco_realtime_monitoring_poc
+Real time monitoring Cisco switch events using expect (proof of concept) 
+
+SNMP is known for very outdated protocal with default 5 mins poll time. How about if we would like to check events in real time? here is the attempt.
+
+I use expect to submit password of mine into my cisco 2960 switch and get the time of the switch back to my log file. Below is my expect.sh. Theoretically you can change "show clock" into anything in order to monitor your CPU, memory comsumption and all the error events. 
+
+```bash
+#!/usr/bin/expect -f
+spawn ssh $REMOTE_CISCO_DEVICE
+expect "Password:" { send "$PASSWORD\r"}
+expect "#"; # This '#' is nothing but the terminal prompt
+set output [open "expect.log" "a+"]
+send "show clock\r"
+expect "#"
+set outcome $expect_out(buffer)
+send "\r"
+puts $output $outcome
+close $output
+```
+Then we use a while loop to see how fast we can poll from this switch
+
+```bash
+while :; do clear; ./expect.sh ; done
+```
+
+Here are the results
+
+```bash
+bash-3.2# cat expect.log | sed '/AUS_OA_3F_AS04#/d' | sed '/show clock/d'
+06:29:00.889 aus Sat Aug 26 2017
+06:29:02.615 aus Sat Aug 26 2017
+06:29:04.150 aus Sat Aug 26 2017
+06:29:05.863 aus Sat Aug 26 2017
+06:29:07.348 aus Sat Aug 26 2017
+06:29:09.173 aus Sat Aug 26 2017
+06:29:10.683 aus Sat Aug 26 2017
+06:29:12.388 aus Sat Aug 26 2017
+06:29:13.891 aus Sat Aug 26 2017
+06:29:15.621 aus Sat Aug 26 2017
+06:29:17.142 aus Sat Aug 26 2017
+06:29:18.865 aus Sat Aug 26 2017
+06:29:20.738 aus Sat Aug 26 2017
+06:29:22.262 aus Sat Aug 26 2017
+06:29:23.992 aus Sat Aug 26 2017
+06:29:25.541 aus Sat Aug 26 2017
+06:29:27.323 aus Sat Aug 26 2017
+06:29:28.882 aus Sat Aug 26 2017
+06:29:32.150 aus Sat Aug 26 2017
+06:29:33.936 aus Sat Aug 26 2017
+06:29:37.103 aus Sat Aug 26 2017
+06:29:39.081 aus Sat Aug 26 2017
+06:29:43.416 aus Sat Aug 26 2017
+06:29:45.275 aus Sat Aug 26 2017
+06:29:51.553 aus Sat Aug 26 2017
+06:29:53.258 aus Sat Aug 26 2017
+06:29:55.016 aus Sat Aug 26 2017
+06:29:56.722 aus Sat Aug 26 2017
+06:29:58.204 aus Sat Aug 26 2017
+06:29:59.749 aus Sat Aug 26 2017
+```
+
+And we calculate how fast does it poll from my switch. As you can see the avarage interval is 1.962 sec.
+
+```bash
+bash-3.2# cat expect.log | sed '/AUS_OA_3F_AS04#/d' | sed '/show clock/d' | sed s'/aus.*//' | sed s'/\.*//' | sed 's/.*://' | awk ' {  if (COUNT > 0 ) {  SUM += $1-PRE } ; COUNT += 1 ; PRE = $1 } END { print SUM/(COUNT-1) }  '
+1.962
+```
+
+Sounds not bad! but can we poll it even faster? Let's benchmark!
+
+From this link [Using SSH public key authentication with Cisco](https://nsrc.org/workshops/2016/apricot2016/raw-attachment/wiki/Track5Wireless/cisco-ssh-auth.htm) we learned we can use RSA key to access cisco devices without passwd.
+
+Therefore here is my attempt for using RSA key. 
+
+```bash
+#!/usr/bin/expect -f
+spawn ssh $REMOTE_CISCO_DEVICE
+expect "#"; # This '#' is nothing but the terminal prompt
+set output [open "rsa_expect.log" "a+"]
+send "show clock\r"
+expect "#"
+set outcome $expect_out(buffer)
+send "\r"
+puts $output $outcome
+close $output
+```
+
+Here is the result.
+
+```bash
+10:58:08.682 aus Sat Aug 26 2017
+10:58:09.706 aus Sat Aug 26 2017
+10:58:10.755 aus Sat Aug 26 2017
+10:58:12.003 aus Sat Aug 26 2017
+10:58:13.261 aus Sat Aug 26 2017
+10:58:14.484 aus Sat Aug 26 2017
+10:58:15.743 aus Sat Aug 26 2017
+10:58:16.998 aus Sat Aug 26 2017
+10:58:18.231 aus Sat Aug 26 2017
+10:58:19.451 aus Sat Aug 26 2017
+10:58:20.496 aus Sat Aug 26 2017
+10:58:21.723 aus Sat Aug 26 2017
+10:58:22.953 aus Sat Aug 26 2017
+10:58:24.187 aus Sat Aug 26 2017
+10:58:25.243 aus Sat Aug 26 2017
+10:58:26.529 aus Sat Aug 26 2017
+10:58:27.620 aus Sat Aug 26 2017
+10:58:28.892 aus Sat Aug 26 2017
+10:58:30.003 aus Sat Aug 26 2017
+10:58:31.255 aus Sat Aug 26 2017
+10:58:32.331 aus Sat Aug 26 2017
+10:58:33.624 aus Sat Aug 26 2017
+10:58:34.841 aus Sat Aug 26 2017
+10:58:35.938 aus Sat Aug 26 2017
+10:58:36.997 aus Sat Aug 26 2017
+10:58:38.280 aus Sat Aug 26 2017
+10:58:39.479 aus Sat Aug 26 2017
+10:58:40.535 aus Sat Aug 26 2017
+10:58:41.744 aus Sat Aug 26 2017
+10:58:42.981 aus Sat Aug 26 2017
+10:58:44.082 aus Sat Aug 26 2017
+10:58:45.159 aus Sat Aug 26 2017
+10:58:46.431 aus Sat Aug 26 2017
+10:58:47.616 aus Sat Aug 26 2017
+10:58:48.637 aus Sat Aug 26 2017
+10:58:49.724 aus Sat Aug 26 2017
+10:58:50.765 aus Sat Aug 26 2017
+10:58:51.838 aus Sat Aug 26 2017
+10:58:52.897 aus Sat Aug 26 2017
+10:58:54.218 aus Sat Aug 26 2017
+10:58:55.456 aus Sat Aug 26 2017
+10:58:56.525 aus Sat Aug 26 2017
+10:58:57.623 aus Sat Aug 26 2017
+10:58:58.654 aus Sat Aug 26 2017
+10:58:59.926 aus Sat Aug 26 2017
+```
+By using RSA key we can make the poll speed up to 1.16464 sec interval. (faster then using passwords for 1.962 sec interval)
+
+```bash
+bash-3.2# cat rsa_expect.log | sed '/AUS_OA_3F_AS04#/d' | sed '/show clock/d' | sed s'/aus.*//' | sed s'/\.*//' | sed 's/.*://' | awk ' {  if (COUNT > 0 ) {  SUM += $1-PRE } ; COUNT += 1 ; PRE = $1 } END { print SUM/(COUNT-1) }  '
+1.16464
+```
+
+How about we add notification ability to the script? 
+
+This sms.sh send out sms message to me when the time of the switch goes to 00 (which happens on every 60 sec of cource.) (We can surely modify it to capture any events as well in the future)
+
+```bash
+#!/bin/bash
+REALTIME=$(tail -n 10 rsa_expect.log2 | grep 00 | sed s'/aus.*//')
+#echo "$REALTIME"
+# this will send an sms message
+curl -X POST https://textbelt.com/text --data-urlencode phone='$YOUR_PHONE_NUMBER' --data-urlencode message=$REALTIME -d key=$TEXTBELT_KEY
+```
+
+And we set a tail -f on bash to activate the sms.sh
+
+```bash
+tail -F rsa_expect.log2 | grep --line-buffered '00' | while read ; do ./sms.sh ; done
+```
+
+Here is the result! We can get a 1.16464 sec interval monitoring my cisco switch and get a sms notification after 4 sec.
+My future goal is to get these real time logs to Cacti or Graphite in order to draw some graphic for long term monitoring.
+
+![fullsizerender](https://user-images.githubusercontent.com/5915590/29746698-1f06544c-8aa8-11e7-8e4d-2e8078e5392e.jpg)

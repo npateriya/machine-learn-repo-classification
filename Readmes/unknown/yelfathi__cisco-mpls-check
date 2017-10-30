@@ -1,0 +1,25 @@
+cisco-mpls-check
+================
+
+The goal is to detect blackhole on MPLS networks through LSP in-band monitoring (even with Layer 3 ECMP), before seamless-BFD will be available.
+
+- lsp_treetrace.tcl is programmed every hour and for each host listed in hosts.txt, it will retrieve every LSP paths using multipath option (Layer 3 ECMP) and log it to treetrace.txt
+- lsp-ping.tcl is programmed every 5 minutes and for each host, path listed in treetrace.txt it will check the reachability
+
+Prerequisites:
+- Set the variable EEM_LSP_PING_DIRECTORY to the EEM working directory (lsp_ping.tcl, lsp_treetrace.tcl and hosts.txt (holds the list of remote PE loopback to check reachability)):
+  - IOS: event manager environment EEM_LSP_PING_DIRECTORY bootflash:/EEM
+  - XR: event manager environment EEM_LSP_PING_DIRECTORY harddisk:/EEM (On XR don't forget to copy the scripts on both RSP locations)
+
+- Set the event manager directory, same as above:
+  - IOS: event manager directory user policy bootflash:/EEM
+  - XR: event manager directory user policy harddisk:/EEM
+
+- Configure the authorization mode:
+  - IOS: event manager session cli username "YOUR_USER"
+  - XR: aaa authorization eventmanager default group tacacs+ local
+
+- Register the scripts:
+  - IOS: event manager policy lsp_ping.tcl and event manager policy lsp_treetrace.tcl
+  - XR: event manager policy lsp_ping.tcl username YOUR_USER persist-time 3600 type user / 
+        event manager policy lsp_treetrace.tcl username YOUR_USER persist-time 3600 type user

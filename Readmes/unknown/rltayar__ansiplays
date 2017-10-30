@@ -1,0 +1,19 @@
+# ansiplays
+
+Repo for my home lab and learning
+
+'site.yml' playbook:
+- Playbook example for updating servers with yum or apt update and upgrade by operating system
+- Includes adding packages via apt using a standard loop to save on size of playbook
+- Example of incoming webhook for slack to post timestamp and completion of the playbook
+- Using ansible vault to protect ansible token (in group_vars "pass.yml")
+- Using cron to run playbook every day at 8am
+
+I will be adding more over the next few months as I continue to learn
+
+
+
+
+
+
+

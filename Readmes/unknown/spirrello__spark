@@ -1,0 +1,24 @@
+This script will fetch the inventory from a Cisco APIC-EM (SDN controller) and post it into a Spark room.
+
+Example:
+
+python3 spark.py
+
+"Contacting APIC-EM.....please wait
+
+Executing GET 'https://devnetapi.cisco.com/sandbox/apic_em/api/v1/network-device'
+
+Your inventory has been posted in: [A ROOM]"
+
+
+Files:
+- spark.py
+- apic_em_spark.py
+- apicem.py
+- apicem_config
+  - This file is left out intentially for security purposes.  To use spark.py you will need to create apicem_config.py and include the following variables:
+    - ip (the url of APIC-EM)
+    - username/password (username/password to access APIC-EM)
+    - version (version of the API, at the time of this writing it was v1)
+    - SPARK_TOKN (token to make API calls to SPARK)
+    - SPARK_ROOM ( a room to post messages to)

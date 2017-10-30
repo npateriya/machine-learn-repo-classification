@@ -1,0 +1,23 @@
+## mycroft Cisco PSIRT Skill
+Gives back information on Cisco PSIRT information
+
+## Description 
+Gives back information on Cisco PSIRT information using your token you setup from https://developer.cisco.com/site/PSIRT/
+
+## Configuration
+Add the following information to the mycroft.conf:
+```
+"PsirtSkill": {
+    "client_id": "clientidtoken",
+    "client_secret": "clientsecrettoken"
+  }
+```
+
+You get the client id and secret from registering for the Cisco PSIRT API at https://developer.cisco.com/site/PSIRT/
+
+## Examples 
+* "open issues for ucs"
+* "issues this month"
+
+## Credits 
+btotharye

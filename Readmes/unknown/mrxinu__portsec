@@ -1,0 +1,11 @@
+# portsec
+
+[![GoDoc](https://godoc.org/github.com/mrxinu/portsec?status.svg)](https://godoc.org/github.com/mrxinu/portsec)
+
+Manage port security on Cisco switches that support it.
+
+## Usage:
+
+```
+portsec -a <status|set|clear|reset> -h <x.x.x.x> -c <community> -i <interface index>
+```

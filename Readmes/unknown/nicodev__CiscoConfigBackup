@@ -1,0 +1,44 @@
+CiscoConfigBackup
+=================
+
+bash script to backup cisco devices configs. Each time you save a new config, the script with save a copy of the Cisco's start-config with the date. If the a config has already been save the same day, the script will add a number.
+The script will also display a diff between the newly saved config and the previous one.
+
+
+Usage :
+
+CiscoConfigBackup "name of device" 
+
+NOTE: "name of device" is normally the hostname. You need to setup a dns or update the hosts file to use hostname.
+
+Then you will need to enter your creds for the Cisco device. The script will then connect to the device via telnet and copy the start-config.
+
+
+
+configbackup-cron
+=================
+
+This script run as a cronjob will check if new config have been saved and will make a full backup as tgz file and save it to SMB folder. You will need a SAMBA server or a Window's share to use it.
+
+
+Example of cronjob (this one will run hourly and send a confirmation email when it is done) :
+
+SHELL=/bin/bash
+
+MAILTO=mailaddress
+
+0 * * * * root /usr/local/bin/configbackup-cron "SAMBA IP address" "samba credential file" "share folder"
+
+
+
+The cred file format is as follow :
+
+domain=DOMAIN
+
+username=username
+
+password=password
+
+
+IMPORTANT: make sure to restrict the file permission. Ideally, create a backup account for this purpose only.
+

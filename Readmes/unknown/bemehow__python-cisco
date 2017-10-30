@@ -1,0 +1,27 @@
+## What's this?
+
+Python client to communicate with the Cisco CSR (Cloud Services Router) REST API
+
+## How to use it?
+
+Initializing the connection:
+
+```
+from cisco import CSR, VPNService
+
+CSR.base_uri = 'https://172.19.153.222:55443'
+CSR.username = 'apiuser'
+CSR.password = 'secretpass'
+CSR.authorize()
+```
+
+You can work directly with resources:
+
+```
+VPNService.list
+VPNService.add(peer_ip='1.1.1.1', type='site-to-site', psk='12345678', keyring_id='', ike_policy='', ipsec_policy='', )
+```
+
+
+## Does it work? NO!
+

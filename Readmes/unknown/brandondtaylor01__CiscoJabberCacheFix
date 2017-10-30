@@ -1,0 +1,15 @@
+# Cisco Jabber Cache Fix
+
+Currently, there is an issue with Cisco Jabber in that once an existing directory number in <b>CUCM</b> is re-assigned to another profile, or another user, the old contact remains while the new contact is added. The issue is that there is a file in which Cisco Jabber maintains the contact cache. Sadly, the only solution is to delete this file.
+
+This has caused a lot of frustration with me and my company, and I've written this small <i>GOLANG</i> tool to remove the offending file. Simply run this tool (Administrator priviledges may or may not be needed), and the issue will be resolved.
+
+<h4>How do I know if I'm affected?</h4>
+- When you, or someone you know call someone via Cisco Jabber, does it show up as the previous owner of that extension?
+- Do voicemails show that person?
+- When calling from a physical Cisco IP phone, does your name show correctly on the remote phone?
+
+If you answered "yes" to any of the above, then you are affected.
+
+In the event that you'd like to read more into this, Cisco WebEx has created a knowledgebase article with my help, which can be found at this address:
+https://cisco-support.webex.com/guest/articles/en_US/Troubleshooting/WBX80162/myr=false

@@ -1,0 +1,45 @@
+# cisco-nxapi
+a node.js wrapper / sdk for cisco nxapi
+
+## IN DEVELOPMENT AND DOES NOT YET WORK (!) 
+
+If you want to contribute please get in touch. 
+
+## Why Node.JS when Cisco promotes usage of python?
+
+If you are building a larger project python will just be a pain. If you just want a simple, dump script then use python by all means, but Node.JS is the future for client/server applications.  
+
+If you havent heard about Node, then you should do yourself a favour and read up on it.
+
+
+## Installation
+
+Clone the repository and run 
+
+```
+npm install 
+```
+
+In your project do: 
+```javascript
+var NXapi = require('cisco-nxapi');
+
+var mySwitches = new NXapi([
+ {
+   host: '10.10.10.10'
+ },
+ {
+   host: '10.20.30.10'
+ }
+]);
+
+
+// promise-based async call (because we dont want to wait and block io)
+mySwitches.showVersion().then((response) => {
+  // do what you want with the response
+}, (error) => {
+  // handle the error in whichever way you prefer.
+}); 
+
+```
+

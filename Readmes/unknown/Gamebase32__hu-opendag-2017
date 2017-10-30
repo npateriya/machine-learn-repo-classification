@@ -1,0 +1,11 @@
+# HU Opendag 2017
+Cisco Network on the Opendag 2017 of the Hogeschool Utrecht in The Netherlands
+
+## How to use the config file
+The routers and switches need to be factory default and into the Global Configuration Mode. You can paste the config into the console to apply it on the device. After that you can close the connection to the device.
+
+## Files
+There is a pkt file added with the network configs simulated in Cisco Packet Tracer.
+
+## Old vs. New Routers / Switches
+For both the old and new routers and switches are configs available.
