@@ -42,12 +42,8 @@ func downloadFromURL(url, dirName, fileName string) (err error) {
 
 func main() {
 
-	t := &github.UnauthenticatedRateLimitedTransport{
-		ClientID:     "npateriya",
-		ClientSecret: "ae35d520d69faf2b41d252c76313266fc72a3360",
-	}
 	ctx := context.Background()
-	client := github.NewClient(t.Client())
+	client := github.NewClient(nil)
 
 	fmt.Println("Repos that contain cisco.")
 
